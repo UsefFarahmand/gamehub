@@ -6,21 +6,9 @@
         "url": "games/PandaClicker/index.html"
     },
     {
-        "title": "Puzzle World",
-        "genre": "Puzzle",
-        "logo": "assets/games/puzzle-world.jpg",
-        "url": "games/puzzle-world/index.html"
-    },
-    {
-        "title": "Racing X",
-        "genre": "Racing",
-        "logo": "assets/games/racing-x.jpg",
-        "url": "games/racing-x/index.html"
-    },
-    {
-        "title": "Dungeon Escape",
-        "genre": "Adventure",
-        "logo": "assets/games/dungeon-escape.jpg",
-        "url": "games/dungeon-escape/index.html"
+        "title": "Panda Memory",
+        "genre": "Casual Puzzle",
+        "logo": "games/PandaMemory/assets/logo.png",
+        "url": "games/PandaMemory/index.html"
     }
 ]
