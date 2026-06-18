@@ -55,6 +55,8 @@ h1{
 
     width:220px;
 
+    max-width:60vw;
+
     cursor:pointer;
 
     transition:.1s;
@@ -228,5 +230,21 @@ background:#555;
 .menu-buttons button{
 
     width:200px;
+
+}
+
+*{
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:manipulation;
+}
+
+button{
+
+min-height:50px;
+
+padding:15px 30px;
+
+font-size:18px;
 
 }
