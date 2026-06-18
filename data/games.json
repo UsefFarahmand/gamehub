@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Panda's Last Bamboo",
+        "genre": "Action / Shooter",
+        "logo": "assets/games/space-shooter.jpg",
+        "url": "Panda's Last Bamboo/index.html"
+    },
+    {
+        "title": "Puzzle World",
+        "genre": "Puzzle",
+        "logo": "assets/games/puzzle-world.jpg",
+        "url": "games/puzzle-world/index.html"
+    },
+    {
+        "title": "Racing X",
+        "genre": "Racing",
+        "logo": "assets/games/racing-x.jpg",
+        "url": "games/racing-x/index.html"
+    },
+    {
+        "title": "Dungeon Escape",
+        "genre": "Adventure",
+        "logo": "assets/games/dungeon-escape.jpg",
+        "url": "games/dungeon-escape/index.html"
+    }
+]
