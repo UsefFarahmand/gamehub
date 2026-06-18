@@ -46,24 +46,18 @@ document.querySelector(".game");
 const start =
 document.getElementById("start");
 
-const back =
-document.getElementById("back");
-
 
 
 start.onclick = ()=>{
 
+    menu.style.display = "none";
 
-menu.classList.add("hidden");
-
-game.classList.remove("hidden");
-
+    game.classList.remove("hidden");
 
 };
 
 
 const backHub = document.getElementById("backHub");
-
 
 backHub.onclick = () => {
 
@@ -71,6 +65,14 @@ backHub.onclick = () => {
 
 };
 
+const exitGame = document.getElementById("exitGame");
+
+
+exitGame.onclick = () => {
+
+    window.location.href = "index.html";
+
+};
 
 if(localStorage.bamboo){
 
