@@ -54,3 +54,46 @@ export function logQueue(gameState,title){
     );
 
 }
+
+export function resolveRemainingQueue(gameState){
+
+    while(gameState.queue.length > 0){
+
+        if(gameState.queue.length <= 2){
+
+            while(gameState.queue.length > 0){
+
+                const card =
+                    gameState.queue.shift();
+
+                card.owner.party.push(card);
+
+            }
+
+        }
+        else{
+
+            const first =
+                gameState.queue.shift();
+
+            const second =
+                gameState.queue.shift();
+
+            first.owner.party.push(first);
+
+            second.owner.party.push(second);
+
+            while(gameState.queue.length > 0){
+
+                const card =
+                    gameState.queue.shift();
+
+                gameState.trash.push(card);
+
+            }
+
+        }
+
+    }
+
+}

@@ -26,6 +26,11 @@ from "./gameOver.js";
 import { addLog }
 from "./logger.js";
 
+import {
+    resolveRemainingQueue
+}
+from "./queueManager.js";
+
 export function startTurn(gameState){
 
     const player =
@@ -44,12 +49,12 @@ export function startTurn(gameState){
         return;
     }
 
-    setTimeout(()=>{
+    setTimeout(async ()=>{
 
         const index =
             getRandomCardIndex(player);
 
-        playCard(
+        await playCard(
             player,
             index,
             gameState
@@ -59,69 +64,102 @@ export function startTurn(gameState){
 
 }
 
-export function playCard(
+
+function wait(ms){
+
+    return new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+
+}
+
+export async function playCard(
     player,
     index,
     gameState
 ){
 
     const card =
-        player.hand.splice(index,1)[0];
+        player.hand.splice(index, 1)[0];
 
 
 
+    // ورود به صف
     addToQueue(
         card,
         gameState
     );
 
+    updateUI(gameState);
+
+    await wait(800);
 
 
+
+    // اجرای قدرت
     logQueue(
         gameState,
         "BEFORE:"
     );
 
-    setTimeout(()=>{
-
-        resolveAbility(
-            card,
-            gameState
-        );
-
-        logQueue(
-            gameState,
-            "AFTER:"
-        );
-
-    },1000);
-
-    
-
-    addLog(
-        gameState,
-        `${player.name} played ${card.name}`
+    resolveAbility(
+        card,
+        gameState
     );
 
-
-    resolveQueue(gameState);
-
-    if(gameState.queue.length === 2){
-
-        addLog(
-            gameState,
-            "Queue resolved"
-        );
-    }
-
-    drawCard(player);
-
-
+    logQueue(
+        gameState,
+        "AFTER:"
+    );
 
     updateUI(gameState);
 
+    await wait(1000);
 
 
+
+    // فقط اگر هنوز 5 کارت یا بیشتر در صف بود
+    if(gameState.queue.length >= 5){
+
+        resolveQueue(gameState);
+
+        updateUI(gameState);
+
+        await wait(1200);
+
+    }
+
+
+
+    // کشیدن کارت جدید
+    drawCard(player);
+
+    updateUI(gameState);
+
+    await wait(300);
+
+
+
+    // پایان بازی؟
+    if(isGameOver(gameState)){
+
+        resolveRemainingQueue(
+            gameState
+        );
+
+        updateUI(gameState);
+
+        finishGame(
+            gameState
+        );
+
+        return;
+
+    }
+
+
+
+    // نوبت بعد
     nextTurn(gameState);
 
 }

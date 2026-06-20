@@ -94,15 +94,18 @@ function renderHand(gameState){
             const cardEl =
                 createCard(card);
 
-            cardEl.onclick=()=>{
+            cardEl.onclick = async ()=>{
 
-                playCard(
-                    player,
-                    index,
-                    gameState
-                );
+                    if(gameState.currentPlayer !== 0)
+                        return;
 
-            };
+                    await playCard(
+                        player,
+                        index,
+                        gameState
+                    );
+
+                };
 
             hand.appendChild(
                 cardEl

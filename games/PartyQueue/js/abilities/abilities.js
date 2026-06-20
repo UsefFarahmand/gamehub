@@ -254,14 +254,15 @@ function crocodile(card, gameState){
             );
 
 
-            queue.splice(
-                index-1,
-                1
+            const eaten =
+                queue[index - 1];
+
+            sendToTrash(
+                eaten,
+                gameState
             );
 
-
             index--;
-
 
         }
         else{
@@ -273,9 +274,6 @@ function crocodile(card, gameState){
 
     }
 
-
-
-    // بعد از خوردن‌ها جایگاه را اصلاح کن
 
     const newIndex =
         queue.indexOf(card);
@@ -421,13 +419,12 @@ function lion(card, gameState){
 
 
         const monkey =
-            queue.splice(
-                monkeyIndex,
-                1
-            )[0];
+            queue[monkeyIndex];
 
-
-        gameState.trash.push(monkey);
+        sendToTrash(
+            monkey,
+            gameState
+        );
 
 
         console.log(
@@ -501,46 +498,30 @@ function monkey(card, gameState){
 
 
 
-    const removed = [];
-
-
-
     for(let i = queue.length - 1; i >= 0; i--){
-
 
         if(
             queue[i].name === "Crocodile" ||
             queue[i].name === "Hippo"
         ){
 
-            removed.unshift(
-                queue[i]
+            console.log(
+                "Monkey removed",
+                queue[i].name
             );
 
-
-            queue.splice(i,1);
+            sendToTrash(
+                queue[i],
+                gameState
+            );
 
         }
 
     }
 
-
-
-    if(removed.length > 0){
-
-
-        queue.unshift(
-            ...removed
-        );
-
-
-        console.log(
-            "Monkey removed:",
-            removed.map(c=>c.name).join(" > ")
-        );
-
-    }
-
+    console.log(
+        "Monkey activated"
+    );
 
 }
 
@@ -565,9 +546,10 @@ function weasel(card, gameState){
 
         if(index !== -1){
 
-            queue.splice(index,1);
-
-            gameState.trash.push(target);
+            sendToTrash(
+                target,
+                gameState
+            );
 
 
             console.log(
@@ -626,7 +608,10 @@ function parrot(card, gameState){
 
 
 
-    gameState.trash.push(target);
+    sendToTrash(
+        target,
+        gameState
+    );
 
 
 
@@ -697,5 +682,23 @@ function moveSlothBearBehind(card, gameState){
         );
 
     }
+
+}
+
+function sendToTrash(card, gameState){
+
+    const index =
+        gameState.queue.indexOf(card);
+
+    if(index !== -1){
+
+        gameState.queue.splice(
+            index,
+            1
+        );
+
+    }
+
+    gameState.trash.push(card);
 
 }
