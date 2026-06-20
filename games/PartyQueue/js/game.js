@@ -1,7 +1,7 @@
 import { CARDS } from "./cards.js";
 import { Player } from "./player.js";
-import { getRandomCardIndex } from "./ai.js";
-import { resolveAbility } from "./abilities.js";
+import { getRandomCardIndex } from "./ai/ai.js";
+import { resolveAbility } from "./abilities/abilities.js";
 
 function shuffle(array) {
 
@@ -217,22 +217,48 @@ function nextPlayer() {
 
 }
 
-function runGame() {
+// function runGame() {
 
-    while(!isGameOver()) {
+//     while(!isGameOver()) {
 
-        const player =
-            gameState.players[
-                gameState.currentPlayer
-            ];
+//         const player =
+//             gameState.players[
+//                 gameState.currentPlayer
+//             ];
 
-        takeTurn(player);
+//         takeTurn(player);
 
-        nextPlayer();
-    }
+//         nextPlayer();
+//     }
 
-    resolveRemainingQueue();
-    finishGame();
+//     resolveRemainingQueue();
+//     finishGame();
+// }
+
+function startGame(){
+
+    updateUI();
+
+    nextTurn();
+
+}
+
+function nextTurn(){
+
+    const player =
+        gameState.players[
+            gameState.currentPlayer
+        ];
+
+
+    console.log(
+        "Turn:",
+        player.name
+    );
+
+
+    enablePlayerInput(player);
+
 }
 
 function endTurn(player) {

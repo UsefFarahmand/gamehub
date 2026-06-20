@@ -1,15 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Queue</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Party Queue</title>
+        
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
 
-    <h1>Party Queue</h1>
+        <button id="helpBtn">
+            ?
+        </button>
+        
+        <div id="game">
 
-    <script type="module" src="./js/game.js"></script>
+            <div id="scoreboard"></div>
 
-</body>
+            <div id="scores"></div>
+
+            <div id="topPlayers">
+
+                <div id="bot1" class="player"></div>
+                <div id="bot2" class="player"></div>
+                <div id="bot3" class="player"></div>
+
+            </div>
+
+            <div id="board">
+
+                <div id="partyArea">
+
+                    <h3>🎉 Party</h3>
+
+                    <div id="partyCards"></div>
+
+                </div>
+
+                <div id="queueArea">
+
+                    <div id="queueSlots">
+
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+                        <div class="slot"></div>
+
+                    </div>
+
+                    <div id="queue"></div>
+
+                </div>
+
+                <div id="trashArea">
+
+                    <h3>🗑 Trash</h3>
+
+                    <div id="trashCards"></div>
+
+                </div>
+
+            </div>
+
+            <div id="currentTurn"></div>
+            <div id="playerHand"></div>
+
+        </div>
+
+        <div id="helpModal" class="modal hidden">
+
+            <div class="modal-content">
+
+                <span id="closeHelp">✕</span>
+
+                <h2>How To Play</h2>
+
+                <p>
+                Play cards into the queue.
+                </p>
+
+                <p>
+                When the queue reaches 5 cards:
+                </p>
+
+                <ul>
+                <li>First two cards join their owners' party.</li>
+                <li>Last card is discarded.</li>
+                </ul>
+
+                <h3>Card Abilities</h3>
+
+                <div id="cardAbilityList"></div>
+
+            </div>
+
+            </div>
+
+        <script type="module" src="js/main.js"></script>
+
+    </body>
 </html>

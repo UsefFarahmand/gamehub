@@ -1,0 +1,162 @@
+body{
+
+    background:#1f2937;
+    color:white;
+
+    font-family:sans-serif;
+
+    margin:0;
+}
+
+#game{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+#topPlayers{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:40px;
+}
+
+.player{
+
+    width:200px;
+
+    padding:10px;
+
+    border:1px solid #555;
+
+    border-radius:10px;
+}
+
+#queue{
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    min-height:120px;
+
+    margin:20px 0;
+}
+
+#playerHand{
+
+    display:flex;
+
+    gap:12px;
+
+    justify-content:center;
+
+    margin-top:40px;
+}
+
+.card{
+
+    width:90px;
+
+    height:120px;
+
+    background:white;
+
+    color:black;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:18px;
+
+    font-weight:bold;
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+}
+
+#board{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:30px;
+}
+
+#queue{
+    display:flex;
+    gap:10px;
+}
+
+.queue-slot{
+    width:120px;
+    height:160px;
+    border:2px dashed #888;
+}
+
+#playerHand{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+}
+
+#scoreboard{
+    position:fixed;
+    top:10px;
+    left:10px;
+}
+
+.owner{
+    font-size:12px;
+    opacity:0.7;
+    margin-top:5px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.75);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.modal-content {
+    width: 700px;
+    max-width: 90%;
+
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.hidden {
+    display: none;
+}
