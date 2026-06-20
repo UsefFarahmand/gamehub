@@ -9,64 +9,97 @@
     </head>
     <body>
 
-        <button id="helpBtn">
-            ?
-        </button>
+        <div id="pageLayout">
+            <div id="leftSidebar">
 
-        <div id="game">
+                <div id="leaderboard">
 
-            <div id="scoreboard"></div>
+                    <h3>🏆 Leaderboard</h3>
 
-            <div id="scores"></div>
-            
-            <div id="currentTurn"></div>
+                    <div class="leaderboard-header">
+                        <span>Player</span>
+                        <span>Score</span>
+                    </div>
 
-            <div id="topPlayers">
-
-                <div id="bot1" class="player"></div>
-                <div id="bot2" class="player"></div>
-                <div id="bot3" class="player"></div>
-
-            </div>
-
-            <div id="board">
-
-                <div id="partyArea">
-
-                    <h3>🎉 Party</h3>
-
-                    <div id="partyCards"></div>
+                    <div id="leaderboardRows"></div>
 
                 </div>
 
-                <div id="queueArea">
+                <div id="gameLog">
+                    <h3>📜 Game Log</h3>
+                    <div id="logEntries"></div>
+                </div>
 
-                    <div id="queueSlots">
+                <div id="chatPanel">
+                    <h3>💬 Chat</h3>
+                    <div class="comingSoon">
+                        Coming Soon
+                    </div>
+                </div>
 
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
-                        <div class="slot"></div>
+            </div>
+
+            <div id="gameColumn">
+                <!-- TOP BAR -->
+                <div id="topBar">
+                    <div id="gameTitle">Party Queue</div>
+                    <div id="turnInfo">Turn: You | Round: 1</div>
+                    <button id="helpBtn">?</button>
+
+                    <div id="mobileMenu">
+
+                        <button id="leaderboardBtn">🏆</button>
+
+                        <button id="logBtn">📜</button>
+
+                        <button id="chatBtn">💬</button>
+
+                    </div>
+                </div>
+
+                <!-- GAME BOARD -->
+                <div id="gameLayout">
+
+                    <div id="mobileTabs">
+
+                        <button id="partyTab">
+                            🎉 Party
+                        </button>
+
+                        <button id="trashTab">
+                            🗑 Trash
+                        </button>
 
                     </div>
 
-                    <div id="queue"></div>
+                    <div id="partyArea">
+                        <h3>🎉 Party</h3>
+                        <div id="partyCards"></div>
+                    </div>
+
+                    <div id="centerArea">
+                        <div id="queueArea">
+                            <div id="queueSlots">
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                            </div>
+
+                            <div id="queue"></div>
+                        </div>
+
+                        <div id="playerHand"></div>
+                    </div>
+                    
+                    <div id="trashArea">
+                        <h3>🗑 Trash</h3>
+                        <div id="trashCards"></div>
+                    </div>
 
                 </div>
-
-                <div id="trashArea">
-
-                    <h3>🗑 Trash</h3>
-
-                    <div id="trashCards"></div>
-
-                </div>
-
             </div>
-
-            <div id="playerHand"></div>
-
         </div>
 
         <div id="helpModal" class="modal hidden">
@@ -94,6 +127,64 @@
                 <div id="animalGrid"></div>
 
             </div>
+        </div>
+
+        <div id="leaderboardModal" class="modal hidden">
+
+            <div class="modal-content">
+
+                <div class="tutorial-header">
+
+                    <h2>🏆 Leaderboard</h2>
+
+                    <button class="closeModal icon-btn">
+                        ✕
+                    </button>
+
+                </div>
+
+                <div id="mobileLeaderboardContent"></div>
+
+            </div>
+
+        </div>
+
+        <div id="logModal" class="modal hidden">
+
+            <div class="modal-content">
+
+                <div class="tutorial-header">
+                    <h2>📜 Game Log</h2>
+
+                    <button class="closeModal icon-btn">
+                        ✕
+                    </button>
+                </div>
+
+                <div id="mobileLogContent"></div>
+
+            </div>
+
+        </div>
+
+        <div id="chatModal" class="modal hidden">
+
+            <div class="modal-content">
+
+                <div class="tutorial-header">
+                    <h2>💬 Chat</h2>
+
+                    <button class="closeModal icon-btn">
+                        ✕
+                    </button>
+                </div>
+
+                <div class="comingSoon">
+                    Coming Soon
+                </div>
+
+            </div>
+
         </div>
 
         <div id="cardModal" class="modal hidden">

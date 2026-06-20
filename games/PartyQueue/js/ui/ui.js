@@ -1,20 +1,33 @@
-import { playCard } from "./game/turnManager.js";
+import { playCard } from "../game/turnManager.js";
+
+import {
+    renderLeaderboard
+}
+from "./leaderboard-ui.js";
+
+import {
+    renderLog
+}
+from "./log-ui.js";
+
 
 export function updateUI(gameState){
 
     renderQueue(gameState);
 
-    renderPlayers(gameState);
+    renderCurrentTurn(gameState);
+
+    renderLeaderboard(gameState);
+
+    renderLog(gameState);
 
     renderHand(gameState);
-
-    renderCurrentTurn(gameState);
 
     renderParty(gameState);
 
     renderTrash(gameState);
 
-    renderScores(gameState);
+    syncMobilePanels();
 }
 
 function renderQueue(gameState){
@@ -50,16 +63,16 @@ function renderQueue(gameState){
 
 function renderCurrentTurn(gameState){
 
+    const player =
+        gameState.players[
+            gameState.currentPlayer
+        ];
+
     document.getElementById(
-        "currentTurn"
+        "turnInfo"
     ).textContent =
 
-        `Turn: ${
-            gameState.players[
-                gameState.currentPlayer
-            ].name
-        }`;
-
+        `Turn: ${player.name} | Round: ${gameState.round}`;
 }
 
 function renderHand(gameState){
@@ -74,11 +87,6 @@ function renderHand(gameState){
 
     const player =
         gameState.players[0];
-
-        console.log(
-        "PLAYER HAND:",
-        player.hand
-    );
 
     player.hand.forEach(
         (card,index)=>{
@@ -105,80 +113,17 @@ function renderHand(gameState){
 
 }
 
-function renderScores(gameState){
 
-    const score =
-        document.getElementById(
-            "scores"
-        );
-
-    score.innerHTML = "";
-
-    gameState.players.forEach(player=>{
-
-        const power =
-            player.party.reduce(
-                (sum,c)=>
-                sum + c.power,
-                0
-            );
-
-        score.innerHTML += `
-
-            <div>
-
-                ${player.name}
-
-                |
-                Party:
-                ${player.party.length}
-
-                |
-                Power:
-                ${power}
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-function renderPlayers(gameState){
-
-    for(let i=1;i<4;i++){
-
-        const player =
-            gameState.players[i];
-
-        const div =
-            document.getElementById(
-                `bot${i}`
-            );
-
-        div.innerHTML = `
-
-            <h3>${player.name}</h3>
-
-            Hand: ${player.hand.length}
-            <br>
-
-            Party: ${player.party.length}
-
-        `;
-    }
-}
 
 function createCard(card){
 
-    const div =
-        document.createElement("div");
+    const div = document.createElement("div");
 
     div.className = "card";
 
-    div.innerHTML = `
+    div.dataset.player = card.owner.id;
 
+    div.innerHTML = `
         <div class="animal">
             ${card.animal}
         </div>
@@ -194,7 +139,6 @@ function createCard(card){
         <div class="owner">
             ${card.owner.name}
         </div>
-
     `;
 
     return div;
@@ -267,4 +211,50 @@ function renderScoreboard(gameState){
 
         }).join(" | ");
 
+}
+
+function syncMobilePanels(){
+
+    if(window.innerWidth > 900){
+
+        return;
+    }
+    
+    const desktopBoard =
+        document.getElementById(
+            "leaderboardRows"
+        );
+
+    const mobileBoard =
+        document.getElementById(
+            "mobileLeaderboardContent"
+        );
+
+    if(
+        desktopBoard &&
+        mobileBoard
+    ){
+
+        mobileBoard.innerHTML =
+            desktopBoard.innerHTML;
+    }
+
+    const desktopLog =
+        document.getElementById(
+            "logEntries"
+        );
+
+    const mobileLog =
+        document.getElementById(
+            "mobileLogContent"
+        );
+
+    if(
+        desktopLog &&
+        mobileLog
+    ){
+
+        mobileLog.innerHTML =
+            desktopLog.innerHTML;
+    }
 }

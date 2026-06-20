@@ -12,7 +12,7 @@ import { drawCard }
 from "./deck.js";
 
 import { updateUI }
-from "../ui.js";
+from "../ui/ui.js";
 
 import { getRandomCardIndex }
 from "../ai/ai.js";
@@ -22,6 +22,9 @@ import {
     finishGame
 }
 from "./gameOver.js";
+
+import { addLog }
+from "./logger.js";
 
 export function startTurn(gameState){
 
@@ -34,7 +37,7 @@ export function startTurn(gameState){
         "START TURN:",
         player.name
     );
-    if(player.id === 0){
+    if(player.id === "p1"){
 
         updateUI(gameState);
 
@@ -95,10 +98,21 @@ export function playCard(
 
     
 
+    addLog(
+        gameState,
+        `${player.name} played ${card.name}`
+    );
+
 
     resolveQueue(gameState);
 
+    if(gameState.queue.length === 2){
 
+        addLog(
+            gameState,
+            "Queue resolved"
+        );
+    }
 
     drawCard(player);
 

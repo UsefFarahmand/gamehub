@@ -13,22 +13,28 @@ playCard
 from "./game/turnManager.js";
 
 import { updateUI }
-from "./ui.js";
+from "./ui/ui.js";
 
 import {
     initTutorial
 }
 from "./game/tutorial.js";
 
+import {
+    initMobileUI,
+    initMobileTabs
+}
+from "./ui/mobile-ui.js";
+
 const players=[
 
-new Player(0,"You"),
+    new Player("p1","You"),
 
-new Player(1,"Bot 1"),
+    new Player("p2","Bot 1"),
 
-new Player(2,"Bot 2"),
+    new Player("p3","Bot 2"),
 
-new Player(3,"Bot 3")
+    new Player("p4","Bot 3")
 
 ];
 
@@ -53,6 +59,10 @@ players.forEach(p=>{
 });
 
 
+
+initMobileUI();
+
+initMobileTabs();
 
 updateUI(gameState);
 
