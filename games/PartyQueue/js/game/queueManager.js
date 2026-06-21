@@ -1,3 +1,9 @@
+import { 
+    addLog,
+    cardLabel
+}
+from "../services/logger.js";
+
 export function addToQueue(card, gameState){
 
 
@@ -39,18 +45,22 @@ export function resolveQueue(gameState){
 
     gameState.trash.push(trash);
 
+    addLog(
+        gameState,
+        first.owner,
+        `${cardLabel(first)} entered the party`
+    );
 
-}
+    addLog(
+        gameState,
+        second.owner,
+        `${cardLabel(second)} entered the party`
+    );
 
-
-
-export function logQueue(gameState,title){
-
-    console.log(
-        title,
-        gameState.queue
-        .map(c=>c.name)
-        .join(" > ")
+    addLog(
+        gameState,
+        trash.owner,
+        `${cardLabel(trash)} was sent to trash`
     );
 
 }

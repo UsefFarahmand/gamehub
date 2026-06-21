@@ -26,15 +26,17 @@ import {
 }
 from "./ui/mobile-ui.js";
 
+import { PLAYER_TYPES } from "./constants/playerTypes.js";
+
 const players=[
 
-    new Player("p1","You"),
+    new Player("p1","You",PLAYER_TYPES.HUMAN),
 
-    new Player("p2","Bot 1"),
+    new Player("p2","Bot 1",PLAYER_TYPES.AI),
 
-    new Player("p3","Bot 2"),
+    new Player("p3","Bot 2",PLAYER_TYPES.AI),
 
-    new Player("p4","Bot 3")
+    new Player("p4","Bot 3",PLAYER_TYPES.AI)
 
 ];
 

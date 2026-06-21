@@ -1226,6 +1226,95 @@ body {
         8px;
 }
 
+.player-name{
+    font-weight: 700;
+}
+
+.log-entry.p1 .player-name{
+    color: var(--p1);
+}
+
+.log-entry.p2 .player-name{
+    color: var(--p2);
+}
+
+.log-entry.p3 .player-name{
+    color: var(--p3);
+}
+
+.log-entry.p4 .player-name{
+    color: var(--p4);
+}
+
+/* ==========================================================
+   KANGAROO MODAL
+========================================================== */
+
+
+.kangaroo-choice {
+
+    width: 350px;
+
+    text-align:center;
+
+}
+
+
+.kangaroo-buttons {
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:20px;
+
+}
+
+
+
+.kangaroo-buttons button {
+
+
+    width:120px;
+
+    height:60px;
+
+
+    border-radius:12px;
+
+
+    border:1px solid var(--border);
+
+
+    background:#111827;
+
+
+    color:white;
+
+
+    font-size:18px;
+
+
+    cursor:pointer;
+
+
+    transition:.2s;
+
+}
+
+
+
+.kangaroo-buttons button:hover {
+
+
+    background:#1f2937;
+
+
+    transform:translateY(-3px);
+
+}
 
 
 /* ==========================================================

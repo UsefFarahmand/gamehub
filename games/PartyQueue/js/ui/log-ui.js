@@ -9,18 +9,22 @@ export function renderLog(gameState){
 
     log.innerHTML = "";
 
-    gameState.logs.forEach(entry=>{
+    gameState.logs.forEach(entry => {
 
-        const div =
+        const row =
             document.createElement("div");
 
-        div.className =
-            "log-entry";
+        row.className =
+            `log-entry ${entry.playerId}`;
 
-        div.textContent =
-            entry;
+        row.innerHTML = `
+            <span class="player-name">
+                ${entry.playerName}
+            </span>
+            ${entry.text}
+        `;
 
-        log.appendChild(div);
+        log.appendChild(row);
 
     });
 }

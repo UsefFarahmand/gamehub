@@ -1,4 +1,32 @@
-export function resolveAbility(card, gameState) {
+import {
+    sendToTrash
+}
+from "./helpers/trash.js";
+
+import {
+    moveFollowersBehind
+}
+from "./helpers/followHelpers.js";
+
+import {
+    moveCard,
+    swapCards
+}
+from "./helpers/queue.js";
+
+import { chooseKangarooJump } 
+from "./helpers/chooser.js";
+
+import { 
+    addLog,
+    cardLabel
+ }
+from "../services/logger.js";
+
+import { CARD_IDS }
+from "../constants/cardIds.js";
+
+export async function resolveAbility(card, gameState) {
 
 
     switch(card.power) {
@@ -55,7 +83,7 @@ export function resolveAbility(card, gameState) {
 
         case 3:
 
-            kangaroo(card, gameState);
+            await kangaroo(card, gameState);
 
             break;
 
@@ -92,7 +120,7 @@ export function resolveAbility(card, gameState) {
 
 }
 
-function kangaroo(card, gameState) {
+async function kangaroo(card, gameState) {
 
 
     const queue =
@@ -107,9 +135,24 @@ function kangaroo(card, gameState) {
         return;
 
 
+    const maxJump = Math.min(index, 2);
+
+    if(maxJump === 0){
+
+        addLog(
+            gameState,
+            card.owner,
+            `${cardLabel(card)} cannot jump`
+        );
+
+        return;
+    }
 
     const jump =
-        Math.floor(Math.random() * 2) + 1;
+        await chooseKangarooJump(
+            card.owner,
+            maxJump
+        );
 
 
 
@@ -122,23 +165,16 @@ function kangaroo(card, gameState) {
         return;
 
 
-
-    console.log(
-        "Kangaroo jumped",
-        jump,
-        "steps"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} jumped ${jump} spaces forward`
     );
 
-
-
-    queue.splice(index,1);
-
-
-
-    queue.splice(
-        targetIndex,
-        0,
-        card
+    moveCard(
+        queue,
+        index,
+        targetIndex
     );
 
 }
@@ -153,7 +189,7 @@ function hippo(card, gameState){
     let index =
         queue.indexOf(card);
 
-
+    let passedCount = 0;
 
     while(index > 0){
 
@@ -163,11 +199,16 @@ function hippo(card, gameState){
 
 
 
-        // گورخر مانع است
-        if(previous.power === 7)
+        if(previous.id === CARD_IDS.ZEBRA){
+            addLog(
+                gameState,
+                card.owner,
+                `${cardLabel(card)} was stopped by ${cardLabel(previous)}`
+            );
             break;
+        }
 
-        if(previous.name === "Sloth Bear"){
+        if(previous.id === CARD_IDS.SLOTH_BEAR){
 
 
             queue[index] =
@@ -180,6 +221,8 @@ function hippo(card, gameState){
 
             index--;
 
+
+            passedCount++;
 
             continue;
 
@@ -199,6 +242,7 @@ function hippo(card, gameState){
 
             index--;
 
+            passedCount++;
         }
         else{
 
@@ -209,11 +253,13 @@ function hippo(card, gameState){
     }
 
 
-    console.log(
-        "Hippo moved"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} pushed through ${passedCount} animals`
     );
 
-    moveSlothBearBehind(
+    moveFollowersBehind(
         card,
         gameState
     );
@@ -229,6 +275,8 @@ function crocodile(card, gameState){
     let index =
         queue.indexOf(card);
 
+    
+    const eatenList = [];
 
 
     while(index > 0){
@@ -240,19 +288,18 @@ function crocodile(card, gameState){
 
 
         // گورخر
-        if(previous.power === 7)
+        if(previous.id === CARD_IDS.ZEBRA){
+            addLog(
+                gameState,
+                card.owner,
+                `${cardLabel(card)} was stopped by ${cardLabel(previous)}`
+            );
             break;
+        }
 
 
 
         if(previous.power < 10){
-
-
-            console.log(
-                "Crocodile ate",
-                previous.name
-            );
-
 
             const eaten =
                 queue[index - 1];
@@ -261,6 +308,8 @@ function crocodile(card, gameState){
                 eaten,
                 gameState
             );
+
+            eatenList.push(previous);
 
             index--;
 
@@ -295,10 +344,15 @@ function crocodile(card, gameState){
 
     }
 
+    const eatenLabels =
+        eatenList.map(
+            cardLabel
+        ).join(", ");
 
-
-    console.log(
-        "Crocodile moved"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} ate ${eatenLabels}`
     );
 
 }
@@ -317,8 +371,10 @@ function snake(card, gameState){
 
 
 
-    console.log(
-        "Snake sorted the queue"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} sorted the queue by strength`
     );
 
 }
@@ -338,24 +394,21 @@ function giraffe(card, gameState){
     if(index <= 0)
         return;
 
-
-
     const previous =
         queue[index - 1];
 
-
-    queue[index] =
-        previous;
-
-
-    queue[index-1] =
-        card;
+    swapCards(
+        queue,
+        index,
+        index - 1
+    );
 
 
 
-    console.log(
-        "Giraffe moved:",
-        queue.map(c=>c.name).join(" > ")
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} jumped ahead of ${cardLabel(previous)}`
     );
 
 }
@@ -367,9 +420,10 @@ function seal(card, gameState){
 
 
 
-    console.log(
-        "Seal reversed queue:",
-        gameState.queue.map(c=>c.name).join(" > ")
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} reversed the queue`
     );
 
 }
@@ -386,21 +440,21 @@ function lion(card, gameState){
         queue.find(
             c =>
             c !== card &&
-            c.name==="Lion"
+            c.id===CARD_IDS.LION
         );
 
 
     if(otherLion){
 
-        queue.splice(
-            queue.indexOf(card),
-            1
+        sendToTrash(
+            card,
+            gameState
         );
 
-        gameState.trash.push(card);
-
-        console.log(
-            "Lion blocked"
+        addLog(
+            gameState,
+            card.owner,
+            `${cardLabel(card)} was blocked by ${cardLabel(otherLion)}`
         );
 
         return;
@@ -409,31 +463,30 @@ function lion(card, gameState){
 
 
 
-    const monkeyIndex =
-        queue.findIndex(
-            c=>c.name==="Monkey"
+    const monkeys =
+        queue.filter(
+            c => c.id === CARD_IDS.MONKEY
         );
 
 
-    if(monkeyIndex !== -1){
-
-
-        const monkey =
-            queue[monkeyIndex];
+    monkeys.forEach(monkey=>{
 
         sendToTrash(
             monkey,
             gameState
         );
 
+    });
 
-        console.log(
-            "Lion sent Monkey to trash"
+    if(monkeys.length > 0){
+
+        addLog(
+            gameState,
+            card.owner,
+            `${cardLabel(card)} scared away ${monkeys.length} Monkey${monkeys.length > 1 ? "s" : ""}`
         );
 
     }
-
-
 
     queue.splice(
         queue.indexOf(card),
@@ -443,15 +496,13 @@ function lion(card, gameState){
 
     queue.unshift(card);
 
-
-
-    console.log(
-        "Lion moved to front"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} moved to the front`
     );
 
-    
-
-    moveSlothBearBehind(
+    moveFollowersBehind(
         card,
         gameState
     );
@@ -481,34 +532,33 @@ function monkey(card, gameState){
 
     const monkeys =
         queue.filter(
-            c=>c.name==="Monkey"
+            c=>c.id===2 //Monkey
         );
 
 
 
     if(monkeys.length < 2){
 
-        console.log(
-            "Monkey moved to end"
+        addLog(
+            gameState,
+            card.owner,
+            `${cardLabel(card)} moved to the end of the queue`
         );
 
         return;
 
     }
 
-
+    const removed = [];
 
     for(let i = queue.length - 1; i >= 0; i--){
 
         if(
-            queue[i].name === "Crocodile" ||
-            queue[i].name === "Hippo"
+            queue[i].id === CARD_IDS.CROCODILE ||
+            queue[i].id === CARD_IDS.HIPPO
         ){
-
-            console.log(
-                "Monkey removed",
-                queue[i].name
-            );
+            
+            removed.push(queue[i]);
 
             sendToTrash(
                 queue[i],
@@ -519,9 +569,15 @@ function monkey(card, gameState){
 
     }
 
-    console.log(
-        "Monkey activated"
-    );
+    if(removed.length > 0){
+
+        addLog(
+            gameState,
+            card.owner,
+            `${cardLabel(card)} scared away ${removed.map(cardLabel).join(", ")}`
+        );
+
+    }
 
 }
 
@@ -540,165 +596,45 @@ function weasel(card, gameState){
 
     targets.forEach(target=>{
 
-        const index =
-            queue.indexOf(target);
-
-
-        if(index !== -1){
-
-            sendToTrash(
-                target,
-                gameState
-            );
-
-
-            console.log(
-                "Weasel removed",
-                target.name
-            );
-        }
+        sendToTrash(
+            target,
+            gameState
+        );
 
     });
 
 
-    console.log(
-        "Weasel cleaned strongest cards"
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} removed ${targets.map(t=>t.name).join(" and ")}`
     );
 
 }
 
 function parrot(card, gameState){
 
+    const targets =
+        gameState.queue
+        .filter(c => c !== card)
+        .sort(
+            (a,b) => b.power - a.power
+        )
+        .slice(0,2);
 
-    const queue =
-        gameState.queue;
+    targets.forEach(target => {
 
-
-    const weakCards =
-        queue.filter(c =>
-            c !== card &&
-            c.power < card.power
+        sendToTrash(
+            target,
+            gameState
         );
-
-
-
-    if(weakCards.length === 0){
-
-        console.log(
-            "Parrot found no weak card"
-        );
-
-        return;
-    }
-
-
-    const target =
-        weakCards.sort(
-            (a,b)=>a.power-b.power
-        )[0];
-
-
-
-    const index =
-        queue.indexOf(target);
-
-
-
-    queue.splice(index,1);
-
-
-
-    sendToTrash(
-        target,
-        gameState
-    );
-
-
-
-    console.log(
-        "Parrot removed",
-        target.name
-    );
-
-}
-
-function moveSlothBearBehind(card, gameState){
-
-
-    const queue =
-        gameState.queue;
-
-
-
-    const cardIndex =
-        queue.indexOf(card);
-
-
-
-    if(cardIndex === -1)
-        return;
-
-
-
-    const passedSloths =
-        queue.filter(
-            (c,index)=>
-            c.name === "Sloth Bear" &&
-            index > cardIndex
-        );
-
-
-
-    passedSloths.forEach(sloth=>{
-
-
-        const index =
-            queue.indexOf(sloth);
-
-
-
-        queue.splice(
-            index,
-            1
-        );
-
-
-        queue.splice(
-            cardIndex + 1,
-            0,
-            sloth
-        );
-
 
     });
 
-
-
-    if(passedSloths.length > 0){
-
-        console.log(
-            "Sloth Bear followed",
-            card.name
-        );
-
-    }
-
-}
-
-function sendToTrash(card, gameState){
-
-    const index =
-        gameState.queue.indexOf(card);
-
-    if(index !== -1){
-
-        gameState.queue.splice(
-            index,
-            1
-        );
-
-    }
-
-    gameState.trash.push(card);
+    addLog(
+        gameState,
+        card.owner,
+        `${cardLabel(card)} removed ${targets.map(cardLabel).join(" and ")}`
+    );
 
 }

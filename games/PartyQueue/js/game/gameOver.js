@@ -62,13 +62,9 @@ export function finishGame(gameState){
 
     gameState.winner = winner;
 
-    console.log(
-        "GAME OVER"
-    );
-
-    console.log(
-        "Winner:",
-        winner.name
+    addLog(
+        gameState,
+        `${winner.name} won the game`
     );
 
 }

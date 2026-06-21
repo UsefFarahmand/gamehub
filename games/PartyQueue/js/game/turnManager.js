@@ -3,8 +3,7 @@ from "../abilities/abilities.js";
 
 import {
     addToQueue,
-    resolveQueue,
-    logQueue
+    resolveQueue
 }
 from "./queueManager.js";
 
@@ -23,8 +22,11 @@ import {
 }
 from "./gameOver.js";
 
-import { addLog }
-from "./logger.js";
+import { 
+    addLog,
+    cardLabel 
+}
+from "../services/logger.js";
 
 import {
     resolveRemainingQueue
@@ -38,16 +40,24 @@ export function startTurn(gameState){
             gameState.currentPlayer
         ];
 
-    console.log(
-        "START TURN:",
-        player.name
-    );
     if(player.id === "p1"){
+
+        addLog(
+            gameState,
+            player,
+            `'re turn!`
+        );
 
         updateUI(gameState);
 
         return;
     }
+
+    addLog(
+        gameState,
+        player,
+        `'s turn!`
+    );
 
     setTimeout(async ()=>{
 
@@ -90,26 +100,19 @@ export async function playCard(
         gameState
     );
 
+    addLog(
+        gameState,
+        player,
+        `played ${cardLabel(card)}`
+    )
+
     updateUI(gameState);
 
     await wait(800);
 
-
-
-    // اجرای قدرت
-    logQueue(
-        gameState,
-        "BEFORE:"
-    );
-
-    resolveAbility(
+    await resolveAbility(
         card,
         gameState
-    );
-
-    logQueue(
-        gameState,
-        "AFTER:"
     );
 
     updateUI(gameState);
