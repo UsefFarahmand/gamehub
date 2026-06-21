@@ -82,6 +82,173 @@ body {
    HEADER
 ========================================================== */
 
+#topBarContent {
+
+    display:grid;
+
+    grid-template-columns:300px 1fr 300px;
+
+    align-items:center;
+
+    height:240px;
+
+    flex-shrink:0;
+}
+
+
+/* LEFT */
+
+#topLeft {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    height: 100%;
+
+    padding-left: 20px;
+}
+
+.turn-label {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: var(--accent);
+}
+
+.turn-divider {
+
+    width: 120px;
+
+    height: 2px;
+
+    background: rgba(255,255,255,.3);
+
+    margin: 10px 0;
+}
+
+.round-label {
+
+    font-size: 18px;
+
+    color: var(--text-main);
+}
+
+
+/* CENTER */
+
+#topCenter {
+
+    height: 100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow: hidden;
+}
+
+#topCenter picture {
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+#topCenter img {
+
+    height: 100%;
+
+    width: auto;
+
+    max-height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+/* RIGHT */
+
+#topRight {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-right: 20px;
+}
+
+.top-btn {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--border);
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.top-btn:hover {
+
+    background: #1f2937;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(0,0,0,.3);
+}
+
+
+/* Small popup */
+
+.small-popup {
+
+    width: 350px;
+
+    text-align: center;
+}
+
+.small-popup p {
+
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
 #topBar {
     text-align: center;
 
@@ -92,17 +259,25 @@ body {
 
 
 #gameTitle {
-    font-size: 22px;
 
-    font-weight: 800;
+    display:flex;
 
-    letter-spacing: 2px;
+    justify-content:center;
 
-    text-align: center;
+    align-items:center;
 
-    margin-top: 10px;
+    margin-top:10px;
 
-    color: var(--text-main);
+}
+
+#gameTitle img {
+
+    width:280px;
+
+    height:auto;
+
+    object-fit:contain;
+
 }
 
 
@@ -207,7 +382,15 @@ body {
 
     padding: 12px;
 
-    @extend .glass-panel;
+    background: var(--bg-panel);
+
+    backdrop-filter: var(--blur);
+
+    border-radius: var(--radius-lg);
+
+    box-sizing: border-box;
+
+    box-shadow: var(--shadow-panel);
 }
 
 
@@ -824,9 +1007,9 @@ body {
 .card-back {
 
 
-    width:45px;
+    width:85px;
 
-    height:65px;
+    height:120px;
 
 
     border-radius:8px;
@@ -913,7 +1096,7 @@ body {
 
 
     background-image:
-    url("../assets/logo.png");
+    url("../assets/img/Logo_medium.png");
 
 
     background-repeat:no-repeat;
@@ -922,10 +1105,10 @@ body {
     background-position:center;
 
 
-    background-size:55%;
+    background-size:100%;
 
 
-    opacity:.85;
+    opacity:1;
 
 
 }
@@ -1377,66 +1560,6 @@ body {
         rgba(239,68,68,.15);
 }
 
-
-
-#helpBtn {
-
-
-    position: absolute;
-
-
-    top: 10px;
-
-
-    right: 10px;
-
-
-    width: 44px;
-
-
-    height: 44px;
-
-
-    border-radius:
-        12px;
-
-
-    border:
-        1px solid var(--border);
-
-
-    background:
-        #111827;
-
-
-    color:
-        white;
-
-
-    font-size:
-        18px;
-
-
-    cursor:
-        pointer;
-
-
-    transition:
-        .2s;
-}
-
-
-
-#helpBtn:hover {
-
-
-    transform:
-        scale(1.1);
-
-
-    background:
-        #1f2937;
-}
 
 
 
@@ -2168,6 +2291,11 @@ body {
     }
 
 
+    #gameTitle img {
+
+        width:180px;
+
+    }
 }
 
 

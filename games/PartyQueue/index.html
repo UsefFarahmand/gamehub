@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wild Guest List</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -41,20 +42,53 @@
 
             <div id="gameColumn">
                 <!-- TOP BAR -->
-                <div id="topBar">
-                    <div id="gameTitle">Wild Guest List</div>
-                    <div id="turnInfo">Turn: You | Round: 1</div>
-                    <button id="helpBtn">?</button>
+                <div id="topBarContent">
 
-                    <div id="mobileMenu">
+                    <!-- Left -->
+                    <div id="topLeft">
 
-                        <button id="leaderboardBtn">🏆</button>
+                        <div class="turn-label">
+                            Turn: You
+                        </div>
 
-                        <button id="logBtn">📜</button>
+                        <div class="turn-divider"></div>
 
-                        <button id="chatBtn">💬</button>
+                        <div class="round-label">
+                            Round: 1
+                        </div>
 
                     </div>
+
+                    <!-- Center -->
+                    <div id="topCenter">
+
+                        <picture>
+
+                            <source
+                                media="(max-width: 900px)"
+                                srcset="assets/img/Logo_medium.png">
+
+                            <img
+                                src="assets/img/Logo-larg.png"
+                                alt="Wild Guest List">
+
+                        </picture>
+
+                    </div>
+
+                    <!-- Right -->
+                    <div id="topRight">
+
+                        <button id="helpBtn" class="top-btn">
+                            ?
+                        </button>
+
+                        <button id="settingsBtn" class="top-btn">
+                            ⚙
+                        </button>
+
+                    </div>
+
                 </div>
 
                 <!-- GAME BOARD -->
@@ -269,6 +303,28 @@
 
                 </div>
 
+
+            </div>
+
+        </div>
+
+        <div id="settingsModal" class="modal hidden">
+
+            <div class="modal-content small-popup">
+
+                <div class="tutorial-header">
+
+                    <h3>About</h3>
+
+                    <button id="closeSettings" class="icon-btn close">
+                        ✕
+                    </button>
+
+                </div>
+
+                <p>
+                    This game was created by Usef Farahmand.
+                </p>
 
             </div>
 

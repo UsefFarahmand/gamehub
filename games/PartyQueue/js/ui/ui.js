@@ -70,11 +70,30 @@ function renderCurrentTurn(gameState){
             gameState.currentPlayer
         ];
 
-    document.getElementById(
-        "turnInfo"
-    ).textContent =
+    const turnPlayer =
+        document.getElementById(
+            "turnPlayer"
+        );
 
-        `Turn: ${player.name} | Round: ${gameState.round}`;
+    const roundInfo =
+        document.getElementById(
+            "roundInfo"
+        );
+
+    if(turnPlayer){
+
+        turnPlayer.textContent =
+            `Turn: ${player.name}`;
+
+    }
+
+    if(roundInfo){
+
+        roundInfo.textContent =
+            `Round: ${gameState.round}`;
+
+    }
+
 }
 
 function renderHand(gameState){
@@ -355,4 +374,53 @@ function syncMobilePanels(){
         mobileLog.innerHTML =
             desktopLog.innerHTML;
     }
+}
+
+export function initializeUI(){
+
+    const settingsBtn =
+        document.getElementById(
+            "settingsBtn"
+        );
+
+    const settingsModal =
+        document.getElementById(
+            "settingsModal"
+        );
+
+    const closeSettings =
+        document.getElementById(
+            "closeSettings"
+        );
+
+    if(settingsBtn){
+
+        settingsBtn.addEventListener(
+            "click",
+            ()=>{
+
+                settingsModal.classList.remove(
+                    "hidden"
+                );
+
+            }
+        );
+
+    }
+
+    if(closeSettings){
+
+        closeSettings.addEventListener(
+            "click",
+            ()=>{
+
+                settingsModal.classList.add(
+                    "hidden"
+                );
+
+            }
+        );
+
+    }
+
 }

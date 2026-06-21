@@ -12,7 +12,10 @@ playCard
 }
 from "./game/turnManager.js";
 
-import { updateUI }
+import { 
+    updateUI,
+    initializeUI 
+}
 from "./ui/ui.js";
 
 import {
@@ -68,6 +71,7 @@ initMobileTabs();
 
 updateUI(gameState);
 
+initializeUI();
 initTutorial();
 
 startTurn(gameState);
