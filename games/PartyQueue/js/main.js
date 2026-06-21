@@ -15,14 +15,11 @@ import {
 from "./game/turnManager.js";
 
 import { 
-    updateUI 
+    updateUI ,
+    initializeUI
 }
 from "./ui/ui.js";
 
-import {
-    initializeModals
-}
-from "./ui/modal-ui.js"
 
 import { initTutorial } from "./game/tutorial.js";
 
@@ -66,7 +63,7 @@ players.forEach(p=>{
 
 });
 
-initializeModals();
+await initializeUI();
 initTutorial();
 
 initMobileUI();

@@ -1,0 +1,25 @@
+{
+    "icons": {
+
+        "leaderboard": "assets/img/icons/leaderboard.png",
+
+        "gameLog": "📜",
+
+        "chat": "💬",
+
+        "party": "🎉",
+
+        "trash": "🗑",
+
+        "settings": "⚙",
+
+        "help": "?",
+
+        "close": "✕",
+
+        "back": "←",
+
+        "kangaroo": "🦘"
+
+    }
+}
