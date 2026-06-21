@@ -84,6 +84,12 @@ function renderHand(gameState){
 
     hand.innerHTML = "";
 
+    const deckCount =
+        document.getElementById("deckCount");
+
+
+    deckCount.textContent =
+        gameState.players[0].deck.length;
 
     const player =
         gameState.players[0];

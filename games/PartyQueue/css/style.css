@@ -608,35 +608,45 @@ body {
    PLAYER HAND
 ========================================================== */
 
+#handArea {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-top:20px;
+
+}
+
 #playerHand {
 
-    position: static;
 
-    transform: none;
-
-
-    display: flex;
-
-    justify-content: center;
+    display:flex;
 
 
-    gap: 12px;
+    justify-content:center;
 
 
-    flex-wrap: wrap;
+    gap:16px;
 
 
-    margin-top: 20px;
+    flex-wrap:wrap;
+
+
 }
 
 #playerHand .card {
 
 
-    width:100px;
+    width:120px;
 
-    height:135px;
+    height:165px;
 
-    font-size:15px;
+    font-size:16px;
 
 }
 
@@ -648,6 +658,112 @@ body {
 
     margin-top: 4px;
 }
+
+/* =========================
+   Deck Stack
+========================= */
+
+
+#deckStack {
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+}
+
+
+
+.deck-back {
+
+
+    width:120px;
+
+    height:165px;
+
+
+    border-radius:12px;
+
+
+    background:
+    linear-gradient(
+        145deg,
+        #374151,
+        #111827
+    );
+
+
+    border:
+    2px solid rgba(255,255,255,.2);
+
+
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.5);
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    position:relative;
+
+
+
+}
+
+
+
+.deck-back::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:8px;
+
+
+    border-radius:8px;
+
+
+    border:
+    1px dashed rgba(255,255,255,.3);
+
+
+}
+
+
+
+#deckCount {
+
+
+    position:relative;
+
+
+    font-size:32px;
+
+
+    font-weight:bold;
+
+
+    color:white;
+
+}
+
+
 
 
 /* ==========================================================
@@ -1657,6 +1773,31 @@ body {
 
 
         gap: 6px;
+    }
+
+    #handArea {
+
+        gap:10px;
+
+    }
+
+
+    #playerHand .card,
+    .deck-back {
+
+
+        width:70px;
+
+        height:100px;
+
+    }
+
+
+
+    #deckCount {
+
+        font-size:22px;
+
     }
 
 
