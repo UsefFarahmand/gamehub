@@ -40,12 +40,28 @@ export function startTurn(gameState){
             gameState.currentPlayer
         ];
 
+    if(
+        player.hand.length === 0 &&
+        player.deck.length === 0
+    ){
+
+        addLog(
+            gameState,
+            player,
+            "has no cards left"
+        );
+
+        nextTurn(gameState);
+
+        return;
+    }
+
     if(player.id === "p1"){
 
         addLog(
             gameState,
             player,
-            `'re turn!`
+            "turn"
         );
 
         updateUI(gameState);
@@ -56,7 +72,7 @@ export function startTurn(gameState){
     addLog(
         gameState,
         player,
-        `'s turn!`
+        "turn"
     );
 
     setTimeout(async ()=>{
@@ -71,7 +87,6 @@ export function startTurn(gameState){
         );
 
     },1000);
-
 }
 
 
@@ -88,6 +103,14 @@ export async function playCard(
     index,
     gameState
 ){
+
+    if(
+        index === -1 ||
+        player.hand.length === 0
+    ){
+        nextTurn(gameState);
+        return;
+    }
 
     const card =
         player.hand.splice(index, 1)[0];
@@ -108,7 +131,7 @@ export async function playCard(
 
     updateUI(gameState);
 
-    await wait(800);
+    await wait(100);
 
     await resolveAbility(
         card,

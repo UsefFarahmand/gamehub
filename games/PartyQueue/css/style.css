@@ -54,6 +54,8 @@ body {
 
     overflow-x: hidden;
     overflow-y: auto;
+
+    font-family:'Poppins', sans-serif;
 }
 
 
@@ -371,6 +373,243 @@ body {
     min-height: 0;
 }
 
+
+/* ==========================================================
+   SPLASH FULL SCREEN
+========================================================== */
+
+.screen-overlay {
+
+    position: fixed;
+
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100vw;
+    height:100vh;
+
+    background:rgba(0,0,0,.8);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+
+.screen-content {
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px;
+
+    background:var(--bg-panel);
+
+    box-sizing:border-box;
+
+}
+
+
+/* لوگو */
+
+.screen-logo {
+
+    width:min(700px,70vw);
+
+    max-height:60vh;
+
+    object-fit:contain;
+
+}
+
+/* دسکتاپ بزرگ */
+@media(min-width:1200px){
+
+    .screen-logo{
+
+        width:800px;
+
+        max-height:65vh;
+
+    }
+
+}
+
+
+/* لپ‌تاپ */
+@media(min-width:700px) and (max-width:1199px){
+
+    .screen-logo{
+
+        width:600px;
+
+        max-height:55vh;
+
+    }
+
+}
+
+
+/* موبایل */
+@media(max-width:600px){
+
+    .screen-logo{
+
+        width:90vw;
+
+        max-height:35vh;
+
+    }
+
+}
+
+.creator {
+
+    position:absolute;
+
+    bottom:25px;
+
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    font-family:'Poppins', sans-serif;
+
+    font-size:14px;
+
+    font-weight:400;
+
+    letter-spacing:.5px;
+
+    color:rgba(255,255,255,.75);
+
+}
+
+
+.creator a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.creator a:hover{
+
+    opacity:.7;
+
+    text-decoration:underline;
+
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    .creator{
+
+        bottom:15px;
+
+        font-size:12px;
+
+    }
+
+}
+
+
+
+/* موبایل */
+
+@media(max-width:600px){
+
+    .creator{
+
+        bottom:15px;
+
+        font-size:12px;
+
+    }
+
+}
+/* دکمه */
+
+.screen-btn {
+
+    margin-top:30px;
+
+    padding:14px 35px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+
+/* موبایل */
+
+@media(max-width:600px){
+
+    .screen-content{
+
+        padding:20px;
+
+    }
+
+
+    .screen-logo{
+
+        width:90vw;
+
+        max-height:35vh;
+
+    }
+
+
+    .screen-btn{
+
+        width:100%;
+
+        max-width:300px;
+
+    }
+
+}
 
 /* ==========================================================
    LEADERBOARD
@@ -1216,7 +1455,52 @@ body {
         0 20px 60px rgba(0,0,0,.6);
 }
 
+.about-content{
 
+    text-align:center;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+
+.about-content strong{
+
+    font-weight:700;
+
+}
+
+
+.website-link{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:10px 20px;
+
+    border-radius:10px;
+
+    background:var(--accent);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.website-link:hover{
+
+    opacity:.8;
+
+}
 
 .hidden {
 

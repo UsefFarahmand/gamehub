@@ -170,3 +170,49 @@ export function initMobileTabs(){
     });
 
 }
+
+export function syncMobilePanels(){
+
+    if(window.innerWidth > 900){
+
+        return;
+    }
+    
+    const desktopBoard =
+        document.getElementById(
+            "leaderboardRows"
+        );
+
+    const mobileBoard =
+        document.getElementById(
+            "mobileLeaderboardContent"
+        );
+
+    if(
+        desktopBoard &&
+        mobileBoard
+    ){
+
+        mobileBoard.innerHTML =
+            desktopBoard.innerHTML;
+    }
+
+    const desktopLog =
+        document.getElementById(
+            "logEntries"
+        );
+
+    const mobileLog =
+        document.getElementById(
+            "mobileLogContent"
+        );
+
+    if(
+        desktopLog &&
+        mobileLog
+    ){
+
+        mobileLog.innerHTML =
+            desktopLog.innerHTML;
+    }
+}

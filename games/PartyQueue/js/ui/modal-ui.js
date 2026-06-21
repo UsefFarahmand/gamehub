@@ -1,3 +1,41 @@
+export function initializeModals(){
+
+    document
+        .getElementById("settingsBtn")
+        ?.addEventListener(
+            "click",
+            ()=> openModal("settingsModal")
+        );
+
+    document
+        .getElementById("closeSettings")
+        ?.addEventListener(
+            "click",
+            ()=> closeModal("settingsModal")
+        );
+
+    document
+        .getElementById("startGameBtn")
+        ?.addEventListener(
+            "click",
+            hideSplash
+        );
+
+    document
+        .getElementById("playAgainBtn")
+        ?.addEventListener(
+            "click",
+            ()=> location.reload()
+        );
+}
+
+function hideSplash(){
+
+    document
+        .getElementById("splashScreen")
+        .classList.add("hidden");
+}
+
 export function openModal(id){
 
     document

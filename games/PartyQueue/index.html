@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wild Guest List</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -314,7 +314,7 @@
 
                 <div class="tutorial-header">
 
-                    <h3>About</h3>
+                    <h3>About This Game</h3>
 
                     <button id="closeSettings" class="icon-btn close">
                         ✕
@@ -322,9 +322,83 @@
 
                 </div>
 
-                <p>
-                    This game was created by Usef Farahmand.
-                </p>
+
+                <div class="about-content">
+
+                    <p>
+                        This game was designed and developed by
+                        <strong>Usef Farahmand</strong>.
+                    </p>
+
+                    <p>
+                        Thank you for playing and supporting my work.
+                    </p>
+
+
+                    <a 
+                        href="https://www.useffarahmand.com/" 
+                        target="_blank"
+                        class="website-link">
+
+                        Visit Website
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- Splash Screen -->
+
+        <div id="splashScreen" class="screen-overlay">
+
+            <div class="screen-content">
+
+                <img
+                    src="assets/img/Logo-splash.png"
+                    alt="Wild Guest List"
+                    class="screen-logo">
+
+                <button id="startGameBtn" class="screen-btn">
+                    Start Game
+                </button>
+
+            </div>
+
+            <div class="creator">
+
+                Created by 
+                <a href="https://www.useffarahmand.com/" target="_blank">
+                    Usef Farahmand
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Win Screen -->
+
+        <div id="endGameScreen"
+            class="screen-overlay hidden">
+
+            <div class="screen-content">
+
+                <h1 id="endGameTitle"></h1>
+
+                <p id="endGameText"></p>
+
+                <div id="finalScores"></div>
+
+                <button id="playAgainBtn"
+                        class="screen-btn">
+
+                    Play Again
+
+                </button>
 
             </div>
 

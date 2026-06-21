@@ -2,26 +2,29 @@ import {gameState} from "./game/gameState.js";
 
 import {Player} from "./player.js";
 
-import {createDeck,drawCard}
+import {
+    createDeck,
+    drawCard
+} 
 from "./game/deck.js";
 
-
 import {
-startTurn,
-playCard
+    startTurn,
+    playCard
 }
 from "./game/turnManager.js";
 
 import { 
-    updateUI,
-    initializeUI 
+    updateUI 
 }
 from "./ui/ui.js";
 
 import {
-    initTutorial
+    initializeModals
 }
-from "./game/tutorial.js";
+from "./ui/modal-ui.js"
+
+import { initTutorial } from "./game/tutorial.js";
 
 import {
     initMobileUI,
@@ -63,15 +66,13 @@ players.forEach(p=>{
 
 });
 
-
+initializeModals();
+initTutorial();
 
 initMobileUI();
 
 initMobileTabs();
 
 updateUI(gameState);
-
-initializeUI();
-initTutorial();
 
 startTurn(gameState);

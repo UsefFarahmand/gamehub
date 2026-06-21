@@ -1,3 +1,6 @@
+import { addLog } from "../services/logger.js";
+import { showEndGame } from "../ui/endgame-ui.js";
+
 export function isGameOver(gameState){
 
     return gameState.players.every(
@@ -9,6 +12,9 @@ export function isGameOver(gameState){
 }
 
 export function finishGame(gameState){
+
+    if(gameState.gameOver)
+        return;
 
     let winner = null;
 
@@ -64,7 +70,9 @@ export function finishGame(gameState){
 
     addLog(
         gameState,
-        `${winner.name} won the game`
+        winner,
+        "won the game!"
     );
 
+    showEndGame(gameState);
 }
