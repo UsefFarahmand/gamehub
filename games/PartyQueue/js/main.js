@@ -7,6 +7,7 @@ import { initTutorial }       from "./game/tutorial.js";
 import { initMobileUI, initMobileTabs } from "./ui/mobile-ui.js";
 import { PLAYER_TYPES, AI_DIFFICULTY, BOT_AVATARS } from "./constants/playerTypes.js";
 import { loadIcons } from "./ui/icon-ui.js"
+import { playBackgroundMusic } from "./services/soundManager.js"
 
 const BOT_DEFS = [
     { id: "p2", name: "Bot 1" },
@@ -114,3 +115,4 @@ document.getElementById("startGameBtn")?.addEventListener("click", () => {
 document.getElementById("confirmDiffBtn")?.addEventListener("click", startGame);
 
 buildDifficultyPanel();
+playBackgroundMusic();

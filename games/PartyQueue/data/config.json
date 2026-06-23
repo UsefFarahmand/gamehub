@@ -26,6 +26,7 @@
         "trashJoin": "",
         "yourTurn": "",
         "win": "",
-        "lose": ""
+        "lose": "",
+        "background":"assets/sound/background.mp3"
     }
 }
