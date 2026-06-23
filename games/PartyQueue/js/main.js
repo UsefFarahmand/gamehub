@@ -6,6 +6,7 @@ import { updateUI, initializeUI } from "./ui/ui.js";
 import { initTutorial }       from "./game/tutorial.js";
 import { initMobileUI, initMobileTabs } from "./ui/mobile-ui.js";
 import { PLAYER_TYPES, AI_DIFFICULTY, BOT_AVATARS } from "./constants/playerTypes.js";
+import { loadIcons } from "./ui/icon-ui.js"
 
 const BOT_DEFS = [
     { id: "p2", name: "Bot 1" },
@@ -16,13 +17,15 @@ const BOT_DEFS = [
 const PLAYER_COLORS = { p1: "var(--p1)", p2: "var(--p2)", p3: "var(--p3)", p4: "var(--p4)" };
 
 // ── Build the difficulty panel inside splash ──────────────
-function buildDifficultyPanel() {
+async function buildDifficultyPanel() {
     const panel = document.getElementById("difficultyPanel");
     if (!panel) return;
 
     panel.innerHTML = BOT_DEFS.map(bot => `
         <div class="bot-row" id="botRow_${bot.id}">
-            <div class="bot-avatar" id="botAvatar_${bot.id}">🐥</div>
+            <<div class="bot-avatar" id="botAvatar_${bot.id}">
+                <span data-icon="bot-easy"></span>
+            </div>
             <div class="bot-info">
                 <div class="bot-name">${bot.name}</div>
                 <div class="diff-toggle" data-bot="${bot.id}">
@@ -41,12 +44,16 @@ function buildDifficultyPanel() {
     // store selections
     const selected = { p2: "easy", p3: "easy", p4: "easy" };
 
-    function updateBotDisplay(botId, diff) {
+    async function updateBotDisplay(botId, diff) {
         selected[botId] = diff;
         const av = document.getElementById(`botAvatar_${botId}`);
         const row = document.getElementById(`botRow_${botId}`);
-        if (av) av.textContent = BOT_AVATARS[diff].emoji;
+        if (av) {
+            av.innerHTML = `<span data-icon="bot-${diff}"></span>`;
+            loadIcons(av);
+        }
         if (row) row.style.setProperty("--bot-color", BOT_AVATARS[diff].color);
+        await loadIcons(av);
     }
 
     panel.addEventListener("click", e => {
@@ -64,6 +71,8 @@ function buildDifficultyPanel() {
 
     // expose selections
     panel._getSelections = () => selected;
+
+    await loadIcons(panel.innerHTML);
 }
 
 // ── Start game ────────────────────────────────────────────

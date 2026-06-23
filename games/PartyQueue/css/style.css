@@ -160,7 +160,7 @@ body {
 
 #topCenter picture {
 
-    height: 100%;
+    height: 140%;
 
     display: flex;
 
@@ -993,8 +993,8 @@ body {
 }
 
 .card-image {
-    width: 65%;
-    height: 65%;
+    width: 85%;
+    height: 85%;
     object-fit: contain;
 }
 
@@ -1104,13 +1104,6 @@ body {
 
     gap: clamp(6px, 2vw, 30px);
 }
-
-
-#queue {
-
-    min-height: 120px;
-}
-
 
 #queue .card {
 
@@ -1271,28 +1264,6 @@ body {
 
 }
 
-
-
-.deck-back::before {
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:8px;
-
-
-    border-radius:8px;
-
-
-    border:
-    1px dashed rgba(255,255,255,.3);
-
-
-}
 
 
 
@@ -1459,7 +1430,7 @@ body {
 
 
     background-image:
-    url("../assets/img/Logo_medium.png");
+    url("../assets/img/Logo-small.png");
 
 
     background-repeat:no-repeat;
@@ -1468,10 +1439,10 @@ body {
     background-position:center;
 
 
-    background-size:100%;
+    background-size:60%;
 
 
-    opacity:1;
+    opacity:0.85;
 
 
 }
@@ -2017,7 +1988,8 @@ body {
 
 
 
-.icon-btn.close {
+.icon-btn.close,
+.panel-close {
 
 
     color:
@@ -2030,7 +2002,8 @@ body {
 
 
 
-.icon-btn.close:hover {
+.icon-btn.close:hover,
+.panel-close:hover {
 
 
     background:
@@ -2337,12 +2310,6 @@ body {
 
 .other-deck-back::before {
     content: "";
-    position: absolute; inset: 0;
-    background-image: url("../assets/img/Logo_medium.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 80%;
-    opacity: 0.35;
 }
 
 .other-deck-count {
@@ -2954,6 +2921,11 @@ body {
     line-height: 1.5;
 }
 
+.panel-info-btn::after {
+    bottom: auto;
+    top: 130%;
+}
+
 .panel-info-btn:hover::after { opacity: 1; }
 
 /* ============================================================
@@ -3021,12 +2993,6 @@ body {
     /* panel close button */
     .panel-close {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px; height: 32px;
-        background: rgba(255,255,255,0.1);
-        border: none; border-radius: 50%;
-        color: #fff; font-size: 16px; cursor: pointer;
     }
 
     /* info tooltip → popup on mobile (handled via JS) */

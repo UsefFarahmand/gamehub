@@ -15,6 +15,20 @@ export function initializeModals(){
         );
 
     document
+        .getElementById("aboutBtn")
+        ?.addEventListener(
+            "click",
+            ()=> openModal("aboutModal")
+        );
+    
+    document
+        .getElementById("closeAbout")
+        ?.addEventListener(
+            "click",
+            ()=> closeModal("aboutModal")
+        );
+
+    document
         .getElementById("playAgainBtn")
         ?.addEventListener(
             "click",

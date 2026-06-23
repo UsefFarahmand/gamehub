@@ -150,8 +150,10 @@ function renderHand(gameState) {
     });
 }
 
+import {loadIcons} from "./icon-ui.js"
+
 // ── Other players — deck-back style with avatar & deck count ──
-function renderOtherPlayers(gameState) {
+async function renderOtherPlayers(gameState) {
     const top   = document.getElementById("topPlayer");
     const left  = document.getElementById("leftPlayer");
     const right = document.getElementById("rightPlayer");
@@ -172,13 +174,20 @@ function renderOtherPlayers(gameState) {
         ).join("");
 
         box.innerHTML = `
-            <div class="other-player-row" data-player="${player.id}"
-                 style="--bot-color:${avatar.color}">
+            <div class="other-player-row"
+                data-player="${player.id}"
+                style="--bot-color:${avatar.color}">
+
                 <div class="other-player-left">
-                    <div class="other-avatar">${avatar.emoji}</div>
+                    <div class="other-avatar">
+                        <span data-icon="bot-${diff}"></span>
+                    </div>
+
                     <div class="player-label">${player.name}</div>
                 </div>
+
                 <div class="other-hand">${handCards}</div>
+
                 <div class="other-player-right">
                     <div class="deck-back other-deck-back" data-player="${player.id}">
                         <span class="other-deck-count">${player.deck.length}</span>
@@ -187,6 +196,8 @@ function renderOtherPlayers(gameState) {
             </div>
         `;
     });
+
+    await loadIcons();
 }
 
 // ── Party ─────────────────────────────────────────────────
