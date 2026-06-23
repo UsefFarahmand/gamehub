@@ -860,7 +860,7 @@ body {
     container-type: size;
 }
 
-/* Tutorial card-info: same layout as game card but no owner badge */
+/* Help card-info: same layout as game card but no owner badge */
 .card-info {
     position: relative;
     display: flex;
@@ -869,12 +869,12 @@ body {
     justify-content: flex-end;
     padding: 0;
     overflow: hidden;
-    /* bigger in the tutorial grid */
+    /* bigger in the help grid */
     width: clamp(80px, 10vw, 120px);
     height: clamp(110px, 14vw, 165px);
 }
 
-.card-info .tutorial-card-emoji {
+.card-info .help-card-emoji {
     font-size: unset;
     flex: 1;
     display: flex;
@@ -892,7 +892,7 @@ body {
     object-fit: contain;
 }
 
-.card-info .tutorial-card-footer {
+.card-info .help-card-footer {
     width: 100%;
     background: rgba(0,0,0,0.38);
     display: flex;
@@ -903,7 +903,7 @@ body {
     flex-shrink: 0;
 }
 
-.card-info .tutorial-card-name {
+.card-info .help-card-name {
     font-size: clamp(7px, 10cqw, 11px);
     font-weight: 600;
     color: #fff;
@@ -913,7 +913,7 @@ body {
     line-height: 1.2;
 }
 
-.card-info .tutorial-card-power {
+.card-info .help-card-power {
     font-size: clamp(8px, 12cqw, 14px);
     font-weight: 800;
     color: #fbbf24;
@@ -1667,11 +1667,11 @@ body {
 }
 
 /* ==========================================================
-   TUTORIAL COMPONENTS
+   Help COMPONENTS
 ========================================================== */
 
 
-.tutorial-layout {
+.help-layout {
 
     display: flex;
 
@@ -1682,7 +1682,7 @@ body {
 
 
 
-.tutorial-header {
+.help-header {
 
     display: flex;
 
@@ -1693,14 +1693,14 @@ body {
 
 
 
-.tutorial-card-emoji {
+.help-card-emoji {
 
     font-size: 42px;
 }
 
 
 
-.tutorial-card-power {
+.help-card-power {
 
     font-size: 24px;
 
@@ -1711,21 +1711,21 @@ body {
 
 
 
-.tutorial-card-detail {
+.help-card-detail {
 
     text-align: center;
 }
 
 
 
-.tutorial-card-detail h2 {
+.help-card-detail h2 {
 
     font-size: 26px;
 
     color: #ffffff;
 }
 
-.tutorial-divider {
+.help-divider {
 
     width: 100%;
 
@@ -1734,6 +1734,20 @@ body {
     background: rgba(255,255,255,.15);
 
     margin: 24px 0 16px;
+}
+
+.tutorial-text p{
+
+    margin: 0 0 6px 0;
+
+    line-height: 1.2;
+}
+
+.tutorialPrevBtn,
+.tutorialNextBtn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
 }
 
 .animal-guide-title {
@@ -1751,7 +1765,7 @@ body {
 
 
 
-.tutorial-card-detail h3 {
+.help-card-detail h3 {
 
     margin-top: 20px;
 
@@ -2426,15 +2440,15 @@ body {
 .power-score { color: #fbbf24; font-weight: 700; }
 .party-count { color: #86efac; font-weight: 600; }
 
-/* Tutorial */
-.tutorial-tip {
+/* Help */
+.help-tip {
     background: rgba(255,255,255,0.06);
     border-left: 3px solid var(--accent);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 10px 14px; margin-top: 18px;
     font-size: 13px; line-height: 1.5; color: var(--text-muted);
 }
-.tutorial-text {
+.help-text {
     font-size: 14px; line-height: 1.7; color: var(--text-muted);
     background: rgba(255,255,255,0.04);
     border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px;
@@ -2706,7 +2720,7 @@ body {
         box-sizing: border-box;
     }
 
-    /* ── Tutorial grid ── */
+    /* ── Help grid ── */
     #animalGrid {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 8px !important;
@@ -3046,7 +3060,7 @@ body {
     /* hand bottom padding */
     #handArea { padding: 12px 12px 28px !important; }
 
-    /* tutorial 3-col grid */
+    /* help 3-col grid */
     #animalGrid {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 8px !important;
@@ -3148,4 +3162,212 @@ body {
     }
     .other-avatar { font-size: 16px; }
     .other-player-left { min-width: 50px; gap: 3px; }
+}
+
+
+/* ==========================================================
+   TUTORIAL — redesigned help-page style
+========================================================== */
+
+.tut-panel {
+    width: min(640px, 92vw);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: rgba(10, 28, 15, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+}
+
+/* Header */
+.tut-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.tut-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tut-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.tut-counter {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.65;
+}
+
+.tut-close {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.tut-close:hover { opacity: 1; }
+
+/* Progress bar */
+.tut-progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+}
+
+.tut-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #e8834a);
+    transition: width 0.35s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+}
+
+/* Body */
+.tut-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 28px 20px;
+    gap: 24px;
+    min-height: 220px;
+}
+
+.tut-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.07);
+    display: none;
+}
+
+.tut-content {
+    text-align: center;
+    flex: 1;
+}
+
+.tut-title {
+    font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 16px;
+    line-height: 1.2;
+}
+
+.tut-text {
+    color: var(--text-muted);
+    font-size: clamp(0.88rem, 2.5vw, 0.97rem);
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.tut-text p {
+    margin: 0 0 8px;
+}
+.tut-text p:last-child { margin-bottom: 0; }
+
+/* Footer */
+.tut-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px 22px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    gap: 12px;
+}
+
+/* Nav buttons */
+.tut-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.tut-nav-btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.35);
+    transform: scale(1.07);
+}
+
+.tut-nav-btn:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+.tut-next.finish-btn {
+    background: linear-gradient(135deg, var(--accent), #e8834a);
+    border-color: transparent;
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 4px 16px rgba(189,93,56,0.45);
+}
+
+.tut-next.finish-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 22px rgba(189,93,56,0.6);
+}
+
+/* Dots */
+.tut-dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.tut-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.25s, transform 0.25s;
+    display: inline-block;
+}
+
+.tut-dot.active {
+    background: var(--accent);
+    transform: scale(1.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+
+    .tut-body {
+        padding: 22px 18px 16px;
+    }
+
+    .tut-header {
+        padding: 14px 16px 12px;
+    }
+
+    .tut-footer {
+        padding: 12px 16px 16px;
+    }
+
+    .tut-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
 }

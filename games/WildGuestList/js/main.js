@@ -3,11 +3,12 @@ import { Player }             from "./player.js";
 import { createDeck, drawCard } from "./game/deck.js";
 import { startTurn, playCard }  from "./game/turnManager.js";
 import { updateUI, initializeUI } from "./ui/ui.js";
-import { initTutorial }       from "./game/tutorial.js";
+import { initHelp }       from "./game/help.js";
 import { initMobileUI, initMobileTabs } from "./ui/mobile-ui.js";
 import { PLAYER_TYPES, AI_DIFFICULTY, BOT_AVATARS } from "./constants/playerTypes.js";
 import { loadIcons } from "./ui/icon-ui.js"
 import { playBackgroundMusic } from "./services/soundManager.js"
+import { initializeTutorial, openTutorial } from "./ui/tutorial-ui.js";
 
 const BOT_DEFS = [
     { id: "p2", name: "Bot 1" },
@@ -98,12 +99,23 @@ async function startGame() {
     document.getElementById("splashScreen").classList.add("hidden");
     document.getElementById("difficultyModal")?.classList.add("hidden");
 
+    await initializeTutorial();
     await initializeUI();
-    initTutorial();
+    initHelp();
     initMobileUI();
     initMobileTabs();
     updateUI(gameState);
     startTurn(gameState);
+
+    const seen =
+            localStorage.getItem(
+                "tutorialSeen"
+            );
+
+    if(!seen){
+
+        openTutorial(true);
+    }
 }
 
 // ── Wire up splash → difficulty panel → start ─────────────

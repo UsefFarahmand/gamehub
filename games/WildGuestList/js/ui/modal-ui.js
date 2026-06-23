@@ -1,3 +1,5 @@
+import { openTutorial } from "./tutorial-ui.js"
+
 export function initializeModals(){
 
     document
@@ -26,6 +28,23 @@ export function initializeModals(){
         ?.addEventListener(
             "click",
             ()=> closeModal("aboutModal")
+        );
+
+    document
+        .getElementById("tutorialBtn")
+        ?.addEventListener(
+            "click",
+            ()=> {
+                openModal("tutorialModal");
+                openTutorial(false);
+            }
+        );
+    
+    document
+        .getElementById("closeToturial")
+        ?.addEventListener(
+            "click",
+            ()=> closeModal("tutorialModal")
         );
 
     document

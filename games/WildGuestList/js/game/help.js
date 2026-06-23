@@ -1,6 +1,6 @@
-let tutorialCards = null;
+let helpCards = null;
 
-export function initTutorial() {
+export function initHelp() {
     const helpBtn   = document.getElementById("helpBtn");
     const helpModal = document.getElementById("helpModal");
     const closeHelp = document.getElementById("closeHelp");
@@ -9,7 +9,7 @@ export function initTutorial() {
 
     helpBtn.addEventListener("click", () => {
         helpModal.classList.remove("hidden");
-        loadTutorialCards();
+        loadHelpCards();
     });
 
     closeHelp.addEventListener("click", () => helpModal.classList.add("hidden"));
@@ -25,15 +25,15 @@ export function initTutorial() {
     });
 }
 
-async function loadTutorialCards() {
-    if (!tutorialCards) {
+async function loadHelpCards() {
+    if (!helpCards) {
         const res = await fetch("./data/cardInfo.json");
-        tutorialCards = await res.json();
+        helpCards = await res.json();
     }
-    renderTutorialCards(tutorialCards);
+    renderHelpCards(helpCards);
 }
 
-function renderTutorialCards(cards) {
+function renderHelpCards(cards) {
     const grid = document.getElementById("animalGrid");
     grid.innerHTML = "";
     cards.forEach(card => {
@@ -42,13 +42,13 @@ function renderTutorialCards(cards) {
 
         const visual = card.image
             ? `<img class="card-image" src="${card.image}" alt="${card.name}" />`
-            : `<div class="tutorial-card-emoji">${card.emoji}</div>`;
+            : `<div class="help-card-emoji">${card.emoji}</div>`;
 
         div.innerHTML = `
             ${visual}
-            <div class="tutorial-card-footer">
-                <div class="tutorial-card-name">${card.name}</div>
-                <div class="tutorial-card-power">${card.power}</div>
+            <div class="help-card-footer">
+                <div class="help-card-name">${card.name}</div>
+                <div class="help-card-power">${card.power}</div>
             </div>
         `;
 
@@ -70,7 +70,7 @@ function openCardInfo(card) {
         : `<div class="detail-emoji">${card.emoji}</div>`;
 
     document.getElementById("cardModalContent").innerHTML = `
-        <div class="tutorial-card-detail">
+        <div class="help-card-detail">
             ${visual}
             <h2>${card.name}</h2>
             <div class="power-badge">⚡ Power ${card.power}</div>
@@ -91,7 +91,7 @@ function openCardInfo(card) {
                 </div>
             </div>
 
-            <div class="tutorial-tip">
+            <div class="help-tip">
                 💡 <strong>Tip:</strong> First 2 cards join their owner's party. Last card goes to trash when the queue reaches 5.
             </div>
         </div>

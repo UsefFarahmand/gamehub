@@ -14,6 +14,10 @@
         "queueExit": "",
         "sound":"assets/img/icons/Sound.png",
         "About Developer": "assets/img/icons/About developer.png",
+        "tutorial": "assets/img/icons/Tutorial.png",
+        "previous":"assets/img/icons/previous.png",
+        "next":"assets/img/icons/next.png",
+        "play":"assets/img/icons/play.png",
 
         "bot-easy": "assets/img/icons/Bot-easy.png",
         "bot-medium": "assets/img/icons/Bot-normal.png",

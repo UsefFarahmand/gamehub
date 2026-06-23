@@ -56,11 +56,14 @@
                             <button id="logBtn"  class="top-btn mobile-only-btn" title="Game Log">
                                 <span data-icon="gameLog"></span>
                             </button>
-                            <button id="helpBtn" class="top-btn" title="Tutorial">
+                            <button id="helpBtn" class="top-btn" title="Help">
                                 <span data-icon="help"></span>
                             </button>
                             <button id="settingsBtn" class="top-btn" title="Settings">
                                 <span data-icon="settings"></span>
+                            </button>
+                            <button id="tutorialBtn" class="top-btn" title="Tutorial">
+                                <span data-icon="tutorial"></span>
                             </button>
                             <button id="aboutBtn" class="top-btn" title="About Developer">
                                 <span data-icon="About Developer"></span>
@@ -139,14 +142,14 @@
 
         <!-- ── MODALS ─────────────────────────────────────── -->
 
-        <!-- Tutorial -->
+        <!-- Help -->
         <div id="helpModal" class="modal hidden">
-            <div class="modal-content tutorial-layout">
-                <div class="tutorial-header">
-                    <h1>Tutorial</h1>
+            <div class="modal-content help-layout">
+                <div class="help-header">
+                    <h1>Help</h1>
                     <button id="closeHelp" class="icon-btn close"><span data-icon="close"></span></button>
                 </div>
-                <div class="tutorial-text">
+                <div class="help-text">
                     Invite wild animals to the party queue!
                     <p>When the queue reaches 5 animals:</p>
                     <ul>
@@ -156,7 +159,7 @@
                     </ul>
                     Gather the biggest party and become the ultimate host!
                 </div>
-                <div class="tutorial-divider"></div>
+                <div class="help-divider"></div>
                 <h2 class="animal-guide-title">Animal Abilities</h2>
                 <div id="animalGrid"></div>
             </div>
@@ -175,10 +178,10 @@
         <!-- Kangaroo -->
         <div id="kangarooModal" class="modal hidden">
             <div class="modal-content kangaroo-choice">
-                <div class="tutorial-header">
+                <div class="help-header">
                     <h2><span data-icon="kangaroo"></span> Kangaroo Jump</h2>
                 </div>
-                <div class="tutorial-text">Choose how many spaces to jump:</div>
+                <div class="help-text">Choose how many spaces to jump:</div>
                 <div class="kangaroo-buttons">
                     <button id="jumpOneBtn">Jump 1</button>
                     <button id="jumpTwoBtn">Jump 2</button>
@@ -200,7 +203,7 @@
         <!-- Settings -->
         <div id="settingsModal" class="modal hidden">
             <div class="modal-content small-popup">
-                <div class="tutorial-header">
+                <div class="help-header">
                     <h3>Settings</h3>
                     <button id="closeSettings" class="icon-btn close"><span data-icon="close"></span></button>
                 </div>
@@ -221,7 +224,7 @@
         <!-- About Developer -->
         <div id="aboutModal" class="modal hidden">
             <div class="modal-content small-popup">
-                <div class="tutorial-header">
+                <div class="help-header">
                     <h3>About Developer</h3>
                     <button id="closeAbout"
                             class="icon-btn close">
@@ -281,6 +284,60 @@
                 <div id="finalScores"></div>
                 <button id="playAgainBtn" class="screen-btn">Play Again</button>
             </div>
+        </div>
+
+        <div id="tutorialModal" class="modal hidden" role="dialog" aria-labelledby="tutorialTitle" aria-modal="true">
+
+            <div class="modal-content tut-panel">
+
+                <!-- Header -->
+                <div class="tut-header">
+                    <div class="tut-header-left">
+                        <span class="tut-label">Tutorial</span>
+                        <span id="tutorialCounter" class="tut-counter">1 / 6</span>
+                    </div>
+                    <button id="closeTutorial" class="icon-btn tut-close" aria-label="Close tutorial">
+                        <span data-icon="close"></span>
+                    </button>
+                </div>
+
+                <!-- Progress bar -->
+                <div class="tut-progress-track">
+                    <div id="tutorialProgressBar" class="tut-progress-fill"></div>
+                </div>
+
+                <!-- Body -->
+                <div class="tut-body">
+
+                    <img
+                        id="tutorialImage"
+                        class="tut-image"
+                        alt="">
+
+                    <div class="tut-content">
+                        <h2 id="tutorialTitle" class="tut-title"></h2>
+                        <div id="tutorialText" class="tut-text"></div>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="tut-footer">
+
+                    <button id="tutorialPrev" class="tut-nav-btn tut-prev" aria-label="Previous slide">
+                        <span data-icon="previous"></span>
+                    </button>
+
+                    <div id="tutorialDots" class="tut-dots"></div>
+
+                    <button id="tutorialNext" class="tut-nav-btn tut-next" aria-label="Next slide">
+                        <span data-icon="next"></span>
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
         <script type="module" src="js/main.js"></script>
