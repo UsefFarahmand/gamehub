@@ -10,5 +10,11 @@
         "genre": "Casual Puzzle",
         "logo": "games/PandaMemory/assets/logo.png",
         "url": "games/PandaMemory/index.html"
+    },
+    {
+        "title": "Wild Guest List",
+        "genre": "Casual Card",
+        "logo": "games/PartyQueue/assets/img/Logo-splash.png",
+        "url": "games/PartyQueue/index.html"
     }
 ]
