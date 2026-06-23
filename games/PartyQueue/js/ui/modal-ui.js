@@ -15,13 +15,6 @@ export function initializeModals(){
         );
 
     document
-        .getElementById("startGameBtn")
-        ?.addEventListener(
-            "click",
-            hideSplash
-        );
-
-    document
         .getElementById("playAgainBtn")
         ?.addEventListener(
             "click",

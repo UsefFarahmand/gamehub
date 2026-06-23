@@ -1,30 +1,18 @@
-export function renderLog(gameState){
+export function renderLog(gameState) {
 
-    const log =
-        document.getElementById(
-            "logEntries"
-        );
-
-    if(!log) return;
-
-    log.innerHTML = "";
-
-    gameState.logs.forEach(entry => {
-
-        const row =
-            document.createElement("div");
-
-        row.className =
-            `log-entry ${entry.playerId}`;
-
-        row.innerHTML = `
-            <span class="player-name">
-                ${entry.playerName}
-            </span>
+    const buildHTML = () => gameState.logs.map(entry => `
+        <div class="log-entry ${entry.playerId}">
+            <span class="player-name">${entry.playerName}</span>
             ${entry.text}
-        `;
+        </div>
+    `).join("");
 
-        log.appendChild(row);
+    const desktop = document.getElementById("logEntries");
+    if (desktop) desktop.innerHTML = buildHTML();
 
-    });
+    const mobile = document.getElementById("mobileLogContent");
+    if (mobile) {
+        mobile.innerHTML = buildHTML();
+        mobile.scrollTop = mobile.scrollHeight;
+    }
 }

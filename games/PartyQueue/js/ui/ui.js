@@ -24,6 +24,8 @@ import {
 }
 from "./icon-ui.js"
 
+import { initSoundToggle } from "../services/soundManager.js"
+
 
 import {
     initializeModals
@@ -36,6 +38,7 @@ export async function initializeUI(){
     initMobileUI();
 
     initializeModals();
+    initSoundToggle();
 }
 
 export function updateUI(gameState){

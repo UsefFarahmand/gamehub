@@ -1,25 +1,25 @@
 {
     "icons": {
-
         "leaderboard": "assets/img/icons/leaderboard.png",
-
         "gameLog": "📜",
-
         "chat": "💬",
-
         "party": "🎉",
-
         "trash": "🗑",
-
         "settings": "⚙",
-
         "help": "?",
-
         "close": "✕",
-
         "back": "←",
-
-        "kangaroo": "🦘"
-
+        "kangaroo": "🦘",
+        "queueEntry": "🚪",
+        "queueExit": "🗑️"
+    },
+    "sounds": {
+        "playCard": "",
+        "queueFull": "",
+        "partyJoin": "",
+        "trashJoin": "",
+        "yourTurn": "",
+        "win": "",
+        "lose": ""
     }
 }

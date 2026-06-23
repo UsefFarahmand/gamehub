@@ -78,7 +78,7 @@ export function startTurn(gameState){
     setTimeout(async ()=>{
 
         const index =
-            getRandomCardIndex(player);
+            getRandomCardIndex(player, gameState);
 
         await playCard(
             player,

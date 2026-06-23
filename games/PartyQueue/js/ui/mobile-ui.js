@@ -1,218 +1,83 @@
-import {
-    openModal,
-    closeModal
-}
-from "./modal-ui.js";
+import { openModal } from "./modal-ui.js";
 
-export function initMobileUI(){
+export function initMobileUI() {
 
-    document
-        .getElementById("leaderboardBtn")
-        ?.addEventListener(
-            "click",
-            ()=>openModal(
-                "leaderboardModal"
-            )
-        );
+    initInfoPopups();
 
-    document
-        .getElementById("logBtn")
-        ?.addEventListener(
-            "click",
-            ()=>openModal(
-                "logModal"
-            )
-        );
+    document.getElementById("logBtn")?.addEventListener("click", () => {
+        openModal("logModal");
+    });
 
-    document
-        .getElementById("chatBtn")
-        ?.addEventListener(
-            "click",
-            ()=>openModal(
-                "chatModal"
-            )
-        );
-
-    document
-        .querySelectorAll(
-            ".closeModal"
-        )
-        .forEach(btn=>{
-
-            btn.addEventListener(
-                "click",
-                ()=>{
-
-                    btn
-                        .closest(".modal")
-                        ?.classList.add(
-                            "hidden"
-                        );
-
-                }
-            );
-
+    document.querySelectorAll(".closeModal").forEach(btn => {
+        btn.addEventListener("click", () => {
+            btn.closest(".modal")?.classList.add("hidden");
         });
-
+    });
 }
 
-export function initMobileTabs(){
+export function initMobileTabs() {
 
+    const partyBtn = document.getElementById("partyTab");
+    const trashBtn = document.getElementById("trashTab");
+    const party    = document.getElementById("partyArea");
+    const trash    = document.getElementById("trashArea");
 
-    const partyButton =
-        document.getElementById("partyTab");
-
-
-    const trashButton =
-        document.getElementById("trashTab");
-
-
-    const party =
-        document.getElementById("partyArea");
-
-
-    const trash =
-        document.getElementById("trashArea");
-
-
-
-
-    function closePanels(){
-
-
+    function closePanels() {
         party?.classList.remove("mobile-open");
-
         trash?.classList.remove("mobile-open");
-
         document.body.classList.remove("popup-open");
-
-
-        // مهم: ریست کردن state دکمه‌ها
-        partyButton?.classList.remove("active");
-
-        trashButton?.classList.remove("active");
-
+        partyBtn?.classList.remove("active");
+        trashBtn?.classList.remove("active");
     }
 
-
-
-
-
-
-    partyButton?.addEventListener("click", ()=>{
-
-
-        const isOpen =
-            party?.classList.contains("mobile-open");
-
-
+    partyBtn?.addEventListener("click", () => {
+        const isOpen = party?.classList.contains("mobile-open");
         closePanels();
-
-
-        // toggle behavior
-        if(!isOpen){
-
+        if (!isOpen) {
             party?.classList.add("mobile-open");
-
-            partyButton.classList.add("active");
-
+            partyBtn.classList.add("active");
             document.body.classList.add("popup-open");
         }
-
     });
 
-
-
-
-
-
-    trashButton?.addEventListener("click", ()=>{
-
-
-        const isOpen =
-            trash?.classList.contains("mobile-open");
-
-
+    trashBtn?.addEventListener("click", () => {
+        const isOpen = trash?.classList.contains("mobile-open");
         closePanels();
-
-
-        if(!isOpen){
-
+        if (!isOpen) {
             trash?.classList.add("mobile-open");
-
-            trashButton.classList.add("active");
-
+            trashBtn.classList.add("active");
             document.body.classList.add("popup-open");
         }
-
     });
 
-
-
-
-
-
-    // close by clicking outside panel
-    [party, trash].forEach(panel=>{
-
-
-        panel?.addEventListener("click", e=>{
-
-
-            if(e.target === panel){
-
-                closePanels();
-
-            }
-
+    [party, trash].forEach(panel => {
+        panel?.addEventListener("click", e => {
+            if (e.target === panel) closePanels();
         });
-
+        panel?.querySelector(".panel-close")?.addEventListener("click", closePanels);
     });
-
 }
 
-export function syncMobilePanels(){
+export function syncMobilePanels() {}
 
-    if(window.innerWidth > 900){
-
-        return;
-    }
-    
-    const desktopBoard =
-        document.getElementById(
-            "leaderboardRows"
-        );
-
-    const mobileBoard =
-        document.getElementById(
-            "mobileLeaderboardContent"
-        );
-
-    if(
-        desktopBoard &&
-        mobileBoard
-    ){
-
-        mobileBoard.innerHTML =
-            desktopBoard.innerHTML;
-    }
-
-    const desktopLog =
-        document.getElementById(
-            "logEntries"
-        );
-
-    const mobileLog =
-        document.getElementById(
-            "mobileLogContent"
-        );
-
-    if(
-        desktopLog &&
-        mobileLog
-    ){
-
-        mobileLog.innerHTML =
-            desktopLog.innerHTML;
-    }
+// Info tooltip as popup on mobile
+export function initInfoPopups() {
+    document.querySelectorAll(".panel-info-btn").forEach(btn => {
+        btn.addEventListener("click", e => {
+            if (window.innerWidth > 600) return;
+            e.stopPropagation();
+            const text = btn.dataset.tooltip;
+            if (!text) return;
+            const popup = document.createElement("div");
+            popup.className = "info-popup-overlay";
+            popup.innerHTML = `
+                <div class="info-popup-box">
+                    <p>${text}</p>
+                    <button class="screen-btn" style="margin-top:12px;padding:8px 20px;font-size:13px;">OK</button>
+                </div>`;
+            popup.querySelector("button").onclick = () => popup.remove();
+            popup.onclick = e => { if (e.target === popup) popup.remove(); };
+            document.body.appendChild(popup);
+        });
+    });
 }
