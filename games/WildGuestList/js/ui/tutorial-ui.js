@@ -77,12 +77,147 @@ function updateCloseButton(){
     );
 }
 
+/* ── Diagram renderers ── */
+
+function renderHandDiagram(diagram){
+    const cards = diagram.cards.map(c => `
+        <div class="tut-card">
+            <div class="tut-card-emoji">${c.emoji}</div>
+            <div class="tut-card-name">${c.name}</div>
+            <div class="tut-card-power">⚡${c.power}</div>
+        </div>
+    `).join("");
+
+    return `
+        <div class="tut-diagram">
+            <div class="tut-diagram-label">${diagram.label}</div>
+            <div class="tut-hand">${cards}</div>
+        </div>
+    `;
+}
+
+function renderQueueAddDiagram(diagram){
+    const beforeCards = diagram.before.map(c => `
+        <div class="tut-card tut-card-sm">
+            <div class="tut-card-emoji">${c.emoji}</div>
+            <div class="tut-card-name">${c.name}</div>
+        </div>
+    `).join('<span class="tut-arrow">›</span>');
+
+    const addedCard = `
+        <div class="tut-card tut-card-sm tut-card-new">
+            <div class="tut-card-emoji">${diagram.added.emoji}</div>
+            <div class="tut-card-name">${diagram.added.name}</div>
+            <div class="tut-card-badge">NEW</div>
+        </div>
+    `;
+
+    return `
+        <div class="tut-diagram">
+            <div class="tut-diagram-label">${diagram.label}</div>
+            <div class="tut-queue-row">
+                ${beforeCards}
+                <span class="tut-arrow">›</span>
+                ${addedCard}
+            </div>
+        </div>
+    `;
+}
+
+function renderAbilityExamples(diagram){
+    const items = diagram.examples.map(e => `
+        <div class="tut-ability-card">
+            <span class="tut-ability-emoji">${e.emoji}</span>
+            <div class="tut-ability-info">
+                <span class="tut-ability-name">${e.name}</span>
+                <span class="tut-ability-hint">${e.hint}</span>
+            </div>
+            <span class="tut-ability-power">⚡${e.power}</span>
+        </div>
+    `).join("");
+
+    return `
+        <div class="tut-diagram">
+            <div class="tut-diagram-label">${diagram.label}</div>
+            <div class="tut-ability-list">${items}</div>
+        </div>
+    `;
+}
+
+function renderResolveDiagram(diagram){
+    const queue = diagram.queue;
+
+    const cards = queue.map((c, i) => {
+        let role = "stay";
+        if(diagram.party.includes(i))  role = "party";
+        if(diagram.trash.includes(i))  role = "trash";
+
+        const badges = {
+            party: '<span class="tut-role-badge badge-party">🎉 Party</span>',
+            trash: '<span class="tut-role-badge badge-trash">🗑️ Trash</span>',
+            stay:  '<span class="tut-role-badge badge-stay">⏳ Stays</span>'
+        };
+
+        return `
+            <div class="tut-card tut-card-sm tut-card-${role}">
+                <div class="tut-card-emoji">${c.emoji}</div>
+                <div class="tut-card-name">${c.name}</div>
+                ${badges[role]}
+            </div>
+        `;
+    }).join('<span class="tut-arrow">›</span>');
+
+    return `
+        <div class="tut-diagram">
+            <div class="tut-diagram-label">${diagram.label}</div>
+            <div class="tut-queue-row tut-queue-wrap">${cards}</div>
+            <div class="tut-resolve-legend">
+                <span class="badge-party tut-legend-dot">🎉 First 2 → Party</span>
+                <span class="badge-stay  tut-legend-dot">⏳ Middle → Stay</span>
+                <span class="badge-trash tut-legend-dot">🗑️ Last → Trash</span>
+            </div>
+        </div>
+    `;
+}
+
+function renderScoreboard(diagram){
+    const rows = diagram.players.map(p => `
+        <div class="tut-score-row ${p.winner ? "tut-score-winner" : ""}">
+            <span class="tut-score-name">${p.winner ? "🏆 " : ""}${p.name}</span>
+            <span class="tut-score-bar-wrap">
+                <span class="tut-score-bar" style="width:${(p.score / 12) * 100}%"></span>
+            </span>
+            <span class="tut-score-num">${p.score} / 12</span>
+        </div>
+    `).join("");
+
+    return `
+        <div class="tut-diagram">
+            <div class="tut-diagram-label">${diagram.label}</div>
+            <div class="tut-scoreboard">${rows}</div>
+        </div>
+    `;
+}
+
+function buildDiagramHTML(diagram){
+    if(!diagram) return "";
+    switch(diagram.type){
+        case "hand":            return renderHandDiagram(diagram);
+        case "queue-add":       return renderQueueAddDiagram(diagram);
+        case "ability-examples":return renderAbilityExamples(diagram);
+        case "resolve":         return renderResolveDiagram(diagram);
+        case "scoreboard":      return renderScoreboard(diagram);
+        default: return "";
+    }
+}
+
+/* ── Core render ── */
+
 function renderSlide(){
 
     const slide =
         slides[currentSlide];
 
-        console.log(currentSlide);
     document
         .getElementById("tutorialTitle")
         .textContent = slide.title;
@@ -105,6 +240,15 @@ function renderSlide(){
         img.style.display = "block";
     } else {
         img.style.display = "none";
+    }
+
+    // Diagram
+    const diagramEl =
+        document.getElementById("tutorialDiagram");
+
+    if(diagramEl){
+        diagramEl.innerHTML =
+            buildDiagramHTML(slide.diagram || null);
     }
 
     // progress dots

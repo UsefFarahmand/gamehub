@@ -227,6 +227,43 @@ body {
     box-shadow: 0 6px 15px rgba(0,0,0,.3);
 }
 
+/* ── Button tooltip (matches party panel tooltip style) ── */
+.top-btn[data-title] {
+    position: relative;
+}
+
+.top-btn[data-title]::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.92);
+
+    background: rgba(10, 31, 15, 0.97);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+    padding: 7px 11px;
+    border-radius: var(--radius-sm, 8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.18s, transform 0.18s;
+    z-index: 500;
+    line-height: 1.4;
+}
+
+.top-btn[data-title]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.top-btn[data-title]:hover { cursor: pointer; }
+
 
 /* Small popup */
 
@@ -2555,12 +2592,18 @@ body {
     }
 
     .player-label { font-size: 11px; white-space: nowrap; }
-    .other-hand   { gap: 4px; display: flex; }
+        .other-hand   { gap: 3px; display: flex; }
 
-    /* other players card-back = same size as player hand card */
+    /* player's own hand card-back */
     .card-back {
         width:  clamp(44px, 12vw, 64px) !important;
         height: clamp(62px, 17vw, 90px) !important;
+    }
+
+    /* opponent hand cards: fixed small px, independent of viewport */
+    .other-hand .card-back {
+        width:  24px !important;
+        height: 34px !important;
     }
 
     .other-deck-back {
@@ -2983,6 +3026,9 @@ body {
     /* info tooltip → popup on mobile (handled via JS) */
     .panel-info-btn::after { display: none; }
 
+    /* hide button tooltip on mobile (no hover) */
+    .top-btn[data-title]::after { display: none; }
+
     /* Log modal same size as party panel */
     #logModal .modal-content {
         width: calc(100vw - 24px) !important;
@@ -3108,6 +3154,12 @@ body {
     gap: 3px;
     flex: 1;
     justify-content: center;
+}
+
+/* Smaller card-backs for opponent hands on desktop */
+.other-hand .card-back {
+    width:  clamp(20px, 2.8vw, 42px);
+    height: clamp(28px, 4vw, 60px);
 }
 
 /* ── leftSidebar also constrained ── */
@@ -3337,4 +3389,271 @@ body {
         width: 40px;
         height: 40px;
     }
+}
+
+/* ══════════════════════════════════════════
+   Tutorial Diagrams
+══════════════════════════════════════════ */
+
+.tut-diagram-wrap {
+    margin-top: 18px;
+}
+
+.tut-diagram {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius-md, 12px);
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tut-diagram-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent, #bd5d38);
+    margin-bottom: 2px;
+}
+
+/* ── Cards ── */
+
+.tut-hand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tut-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 68px;
+    position: relative;
+}
+
+.tut-card-sm {
+    padding: 7px 10px 6px;
+    min-width: 56px;
+}
+
+.tut-card-emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.tut-card-name {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.tut-card-power {
+    font-size: 0.62rem;
+    color: var(--accent, #bd5d38);
+    font-weight: 700;
+}
+
+.tut-card-badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background: var(--accent, #bd5d38);
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 2px 5px;
+    border-radius: 20px;
+}
+
+.tut-card-new {
+    border-color: var(--accent, #bd5d38);
+    box-shadow: 0 0 10px rgba(189,93,56,0.35);
+}
+
+/* outcome colours */
+.tut-card-party {
+    border-color: #4caf82;
+    background: rgba(76,175,130,0.12);
+}
+.tut-card-trash {
+    border-color: #e05252;
+    background: rgba(224,82,82,0.10);
+    opacity: 0.7;
+}
+.tut-card-stay {
+    border-color: rgba(255,255,255,0.18);
+}
+
+/* ── Queue rows ── */
+
+.tut-queue-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 4px;
+    justify-content: center;
+    overflow-x: auto;
+    padding-bottom: 2px;
+}
+
+.tut-queue-wrap {
+    flex-wrap: wrap;
+    gap: 6px 4px;
+}
+
+.tut-arrow {
+    color: rgba(255,255,255,0.3);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    padding: 0 2px;
+}
+
+/* ── Resolve legend ── */
+
+.tut-resolve-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.tut-legend-dot {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.tut-role-badge {
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 3px;
+}
+
+.badge-party { background: rgba(76,175,130,0.25); color: #4caf82; }
+.badge-trash { background: rgba(224,82,82,0.20);  color: #e05252; }
+.badge-stay  { background: rgba(255,255,255,0.10);color: rgba(255,255,255,0.6); }
+
+/* ── Ability list ── */
+
+.tut-ability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tut-ability-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.tut-ability-emoji {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.tut-ability-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+    text-align: left;
+}
+
+.tut-ability-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.tut-ability-hint {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.tut-ability-power {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent, #bd5d38);
+    flex-shrink: 0;
+}
+
+/* ── Scoreboard ── */
+
+.tut-scoreboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tut-score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tut-score-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    width: 56px;
+    flex-shrink: 0;
+    text-align: left;
+}
+
+.tut-score-bar-wrap {
+    flex: 1;
+    height: 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.tut-score-bar {
+    display: block;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+.tut-score-winner .tut-score-bar {
+    background: linear-gradient(90deg, var(--accent, #bd5d38), #e8834a);
+}
+
+.tut-score-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    width: 44px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .tut-card { min-width: 50px; padding: 7px 8px 6px; }
+    .tut-card-emoji { font-size: 1.3rem; }
+    .tut-ability-card { padding: 7px 10px; }
 }
