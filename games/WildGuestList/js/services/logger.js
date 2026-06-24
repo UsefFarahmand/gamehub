@@ -5,8 +5,9 @@ export function addLog(gameState, player, textKey, params = {}) {
     const text = resolveLogText(textKey, params);
 
     const log = {
-        playerId:   player?.id,
-        playerName: player?.name,
+        playerId:    player?.id,
+        playerName:  player?.name,
+        playerNameKey: player?.nameKey ?? null,
         textKey,
         params,
         text,

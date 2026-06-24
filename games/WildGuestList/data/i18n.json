@@ -98,7 +98,10 @@
     "helpGoal": "Gather the biggest party and become the ultimate host!",
     "helpWhenQueue": "When the queue reaches 5 animals:",
     "animalAbilities": "Animal Abilities",
-    "logModalTitle": "Game Log"
+    "logModalTitle": "Game Log",
+    "aboutVisit": "Visit Website",
+    "playerNameLabel": "Your Name",
+    "playerNamePlaceholder": "Enter your name..."
   },
   "fa": {
     "dir": "rtl",
@@ -199,7 +202,10 @@
     "helpGoal": "بزرگ‌ترین مهمانی را جمع کن و بهترین میزبان شو!",
     "helpWhenQueue": "وقتی صف به ۵ حیوان می‌رسد:",
     "animalAbilities": "توانایی‌های حیوانات",
-    "logModalTitle": "گزارش بازی"
+    "logModalTitle": "گزارش بازی",
+    "aboutVisit": "مشاهده وبسایت",
+    "playerNameLabel": "نام شما",
+    "playerNamePlaceholder": "نام خود را وارد کنید..."
   },
   "ar": {
     "dir": "rtl",
@@ -300,7 +306,10 @@
     "helpGoal": "اجمع أكبر حفلة وكن أفضل مضيف!",
     "helpWhenQueue": "عندما يصل الصف إلى 5 حيوانات:",
     "animalAbilities": "قوى الحيوانات",
-    "logModalTitle": "سجل اللعبة"
+    "logModalTitle": "سجل اللعبة",
+    "aboutVisit": "زيارة الموقع",
+    "playerNameLabel": "اسمك",
+    "playerNamePlaceholder": "أدخل اسمك..."
   },
   "tr": {
     "dir": "ltr",
@@ -401,6 +410,9 @@
     "helpGoal": "En büyük partiyi topla ve en iyi ev sahibi ol!",
     "helpWhenQueue": "Sıra 5 hayvana ulaştığında:",
     "animalAbilities": "Hayvan Yetenekleri",
-    "logModalTitle": "Oyun Günlüğü"
+    "logModalTitle": "Oyun Günlüğü",
+    "aboutVisit": "Web Sitesini Ziyaret Et",
+    "playerNameLabel": "Adınız",
+    "playerNamePlaceholder": "Adınızı girin..."
   }
 }

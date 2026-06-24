@@ -49,10 +49,10 @@ export async function initializeUI(){
     });
 }
 
-export function updateUI(gameState){
+export async function updateUI(gameState){
     _lastGameState = gameState;
 
-    renderGame(gameState);
+    await renderGame(gameState);
 
     renderLeaderboard(gameState);
 

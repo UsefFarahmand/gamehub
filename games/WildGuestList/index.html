@@ -229,7 +229,7 @@
                     <div class="settings-divider"></div>
 
                     <div class="about-meta">
-                        <div><strong data-i18n="settingsVersion">Version</strong>: 1.0.0</div>
+                        <div><strong data-i18n="settingsVersion">Version</strong>: 1.1.0</div>
                     </div>
 
                 </div>
@@ -240,26 +240,26 @@
         <div id="aboutModal" class="modal hidden">
             <div class="modal-content small-popup">
                 <div class="help-header">
-                    <h3>About Developer</h3>
-                    <button id="closeAbout"
-                            class="icon-btn close">
+                    <h3 data-i18n="aboutTitle">About Developer</h3>
+                    <button id="closeAbout" class="icon-btn close">
                         <span data-icon="close"></span>
                     </button>
                 </div>
 
                 <div class="about-content">
                     <p>
-                        This game was designed and developed by
+                        <span data-i18n="aboutText">This game was designed and developed by</span>
                         <strong>Usef Farahmand</strong>.
                     </p>
 
-                    <p>
+                    <p data-i18n="aboutThanks">
                         Thank you for playing and supporting my work.
                     </p>
 
                     <a href="https://www.useffarahmand.com/"
-                    target="_blank"
-                    class="website-link">
+                       target="_blank"
+                       class="website-link"
+                       data-i18n="aboutVisit">
                         Visit Website
                     </a>
                 </div>
@@ -270,6 +270,11 @@
         <div id="splashScreen" class="screen-overlay">
             <div class="screen-content">
                 <img src="assets/img/Logo-splash.png" alt="Wild Guest List" class="screen-logo">
+                <div class="player-name-row">
+                    <label class="player-name-label" data-i18n="playerNameLabel">Your Name</label>
+                    <input id="playerNameInput" class="player-name-input" type="text" maxlength="20"
+                           data-i18n-placeholder="playerNamePlaceholder" placeholder="Enter your name...">
+                </div>
                 <button id="startGameBtn" class="screen-btn" data-i18n="splashStart">Start Game</button>
                 <button id="splashSettingsBtn" class="splash-settings-btn" data-i18n="splashSettings">Settings</button>
             </div>

@@ -1,4 +1,4 @@
-import { t, getLang } from "../i18n.js";
+import { t, getLang, playerDisplayName } from "../i18n.js";
 import { playCard } from "../game/turnManager.js";
 import { BOT_AVATARS, AI_DIFFICULTY } from "../constants/playerTypes.js";
 import { playSound } from "../services/soundManager.js";
@@ -74,11 +74,11 @@ export async function animatePlay(cardIndex) {
 }
 
 // ── Main render ───────────────────────────────────────────
-export function renderGame(gameState) {
-    renderQueue(gameState);
+export async function renderGame(gameState) {
+    await renderQueue(gameState);
     renderCurrentTurn(gameState);
     renderHand(gameState);
-    renderOtherPlayers(gameState);
+    await renderOtherPlayers(gameState);
     renderParty(gameState);
     renderTrash(gameState);
     setMyTurnHighlight(gameState.currentPlayer === 0);
@@ -184,7 +184,7 @@ async function renderOtherPlayers(gameState) {
                         <span data-icon="bot-${diff}"></span>
                     </div>
 
-                    <div class="player-label">${player.name}</div>
+                    <div class="player-label">${playerDisplayName(player)}</div>
                 </div>
 
                 <div class="other-hand">${handCards}</div>
@@ -229,7 +229,7 @@ export function createCard(card) {
         : `<div class="card-emoji">${card.animal}</div>`;
 
     div.innerHTML = `
-        <div class="card-owner-badge">${card.owner.name}</div>
+        <div class="card-owner-badge">${playerDisplayName(card.owner)}</div>
         <div class="card-visual">${visual}</div>
         <div class="card-footer">
             <div class="card-name">${displayName}</div>
@@ -244,6 +244,6 @@ function renderCurrentTurn(gameState) {
     const player = gameState.players[gameState.currentPlayer];
     const turnEl  = document.getElementById("turnPlayer");
     const roundEl = document.getElementById("roundInfo");
-    if (turnEl)  turnEl.textContent  = `${t("topTurn")}: ${player.name}`;
+    if (turnEl)  turnEl.textContent  = `${t("topTurn")}: ${playerDisplayName(player)}`;
     if (roundEl) roundEl.textContent = `${t("topRound")}: ${gameState.round}`;
 }

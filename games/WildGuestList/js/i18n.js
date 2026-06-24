@@ -53,6 +53,12 @@ export async function applyLang(lang, allStrings) {
         }
     });
 
+    // Update data-i18n-placeholder (inputs with translatable placeholder)
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        el.placeholder = allStrings[lang][key] ?? allStrings["en"][key] ?? key;
+    });
+
     // Update data-tooltip-key elements
     document.querySelectorAll("[data-tooltip-key]").forEach(el => {
         const key = el.dataset.tooltipKey;
@@ -96,4 +102,10 @@ export function buildLangSelector(container) {
         if (!btn) return;
         setLang(btn.dataset.lang);
     });
+}
+
+/* ── Player display name (respects nameKey for bots/you) ── */
+export function playerDisplayName(player) {
+    if (player.nameKey) return t(player.nameKey);
+    return player.name;
 }

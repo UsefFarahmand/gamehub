@@ -52,7 +52,10 @@ async function buildDifficultyPanel() {
     }
 
     renderPanel();
-    window.addEventListener("langchange", renderPanel);
+    window.addEventListener("langchange", async () => {
+        renderPanel();
+        await loadIcons(panel);
+    });
 
     // store selections
     const selected = { p2: "easy", p3: "easy", p4: "easy" };
@@ -88,11 +91,17 @@ async function startGame() {
     const panel      = document.getElementById("difficultyPanel");
     const selections = panel?._getSelections?.() || { p2: "easy", p3: "easy", p4: "easy" };
 
+    const nameInput  = document.getElementById("playerNameInput");
+    const customName = nameInput?.value?.trim();
+    // p1: if user typed a name use it (no nameKey), otherwise use "you" key
+    const p1Name    = customName || t("you");
+    const p1NameKey = customName ? null : "you";
+
     const players = [
-        new Player("p1", t("you"),   PLAYER_TYPES.HUMAN),
-        new Player("p2", t("bot1"),  PLAYER_TYPES.AI, selections.p2),
-        new Player("p3", t("bot2"),  PLAYER_TYPES.AI, selections.p3),
-        new Player("p4", t("bot3"),  PLAYER_TYPES.AI, selections.p4),
+        new Player("p1", p1Name,    PLAYER_TYPES.HUMAN, AI_DIFFICULTY.EASY, p1NameKey),
+        new Player("p2", t("bot1"), PLAYER_TYPES.AI,    selections.p2,       "bot1"),
+        new Player("p3", t("bot2"), PLAYER_TYPES.AI,    selections.p3,       "bot2"),
+        new Player("p4", t("bot3"), PLAYER_TYPES.AI,    selections.p4,       "bot3"),
     ];
 
     gameState.players = players;

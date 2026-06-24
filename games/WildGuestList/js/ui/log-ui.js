@@ -1,4 +1,4 @@
-import { t } from "../i18n.js";
+import { t, playerDisplayName } from "../i18n.js";
 
 function resolveLogText(entry) {
     if (!entry.textKey) return entry.text || "";
@@ -30,12 +30,14 @@ function resolveLogText(entry) {
 }
 
 export function renderLog(gameState) {
-    const buildHTML = () => gameState.logs.map(entry => `
+    const buildHTML = () => gameState.logs.map(entry => {
+        const displayName = entry.playerNameKey ? t(entry.playerNameKey) : (entry.playerName ?? "");
+        return `
         <div class="log-entry ${entry.playerId}">
-            <span class="player-name">${entry.playerName}</span>
+            <span class="player-name">${displayName}</span>
             ${resolveLogText(entry)}
-        </div>
-    `).join("");
+        </div>`;
+    }).join("");
 
     const desktop = document.getElementById("logEntries");
     if (desktop) desktop.innerHTML = buildHTML();

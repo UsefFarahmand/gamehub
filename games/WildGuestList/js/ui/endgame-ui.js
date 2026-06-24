@@ -1,4 +1,4 @@
-import { t } from "../i18n.js";
+import { t, playerDisplayName } from "../i18n.js";
 import { playSound } from "../services/soundManager.js";
 
 export function showEndGame(gameState) {
@@ -14,7 +14,7 @@ export function showEndGame(gameState) {
         playSound("win");
     } else {
         title.textContent = t("endLoseTitle");
-        text.textContent  = `${winner.name} ${t("endLoseText")}`;
+        text.textContent  = `${playerDisplayName(winner)} ${t("endLoseText")}`;
         playSound("lose");
     }
 
@@ -37,7 +37,7 @@ export function showEndGame(gameState) {
                 <div class="final-score-row ${isWinner ? "winner-row" : ""}"
                      data-player="${player.id}">
                     <span class="rank-badge">${idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `#${idx+1}`}</span>
-                    <span class="player-name">${player.name}</span>
+                    <span class="player-name">${playerDisplayName(player)}</span>
                     <span class="party-count">${player.party.length} 🎉</span>
                     <span class="power-score">${power} ⚡</span>
                 </div>`;

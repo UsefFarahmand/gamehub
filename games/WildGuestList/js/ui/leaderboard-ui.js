@@ -1,4 +1,4 @@
-import { t } from "../i18n.js";
+import { t, playerDisplayName } from "../i18n.js";
 
 export function renderLeaderboard(gameState) {
 
@@ -15,7 +15,7 @@ export function renderLeaderboard(gameState) {
         const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `#${i+1}`;
         return `<div class="leaderboard-row" data-player="${p.id}">
             <span class="lb-rank">${medal}</span>
-            <span class="lb-name">${p.name}</span>
+            <span class="lb-name">${playerDisplayName(p)}</span>
             <span class="lb-cards" title="${t("endParty")}">${count} 🎉</span>
             <span class="lb-score" title="${t("endPower")}">${score} ⚡</span>
         </div>`;
